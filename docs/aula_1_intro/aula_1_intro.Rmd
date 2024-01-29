@@ -1,11 +1,12 @@
 ---
 title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
 author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
-date: \today
+date: 05/02/2024
 institute: Universidade de São Paulo
 output: binb::metropolis
 fontsize: 12pt
 classoption: aspectratio=169 
+toc: true
 ---
 
 ```{r,setup, include=FALSE}
@@ -16,7 +17,9 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## Por que o curso?
 
-(Inserir Thiago comments)
+* Analizadores de poluentes mendem concentrações com maior frequência.
+* R é uma ótima ferramenta para mexer com dados.
+* É importante conhecer uma linguagem de programação.
 
 ## Por que R?
 ::: columns
@@ -75,10 +78,6 @@ include_graphics("figures/Rlogo.png")
 ::::
 :::
 
-
-
-:::
-
 # RStudio
 
 ## RStudio
@@ -100,7 +99,8 @@ include_graphics("figures/rstudio-panes-labeled.jpeg")
 
 ::: columns
 :::: column
-- What you need to know to start  \alert{doing  R}
+- _What you need to know to start  \alert{doing  R}_
+
 ::::
 
 :::: column
@@ -112,14 +112,15 @@ knitr::include_graphics('figures/TTM.jpg')
 
 ## R como calculadora
 
-- R pode ser usado como calculadora. Segue a ordem das operações
+- R pode ser usado como calculadora. 
+- Segue a ordem das operações
 ```{r, echo=TRUE}
 (5 + 10 * 2 / 4) ^ 2 - 5
 ```
 
 ## Declarar variavéis
 
-- No R usamos \textbf{\alert{`<-`}} em vez de **`=`** para definir variavéis.
+- No R usamos \textbf{\alert{<-}} em vez de **`=`** para definir variavéis.
 ```{r}
 R <- 8.314
 R
@@ -128,34 +129,39 @@ R
 
 ## Comentar
 
-- Para comentar **`#`**
+- Para comentar usamos **`#`**. O código após o **`#`** não é lido.
 
 ```{r , echo = TRUE}
 R <- 8.314 # Constante universal dos gases (J K / mol)
 R
 ```
 
-- Para usar funções: **`nome_da_função()`**
+
+## Funções
+- Para usar funções: **`nome_da_função()`**. 
+- Dentro dos `()` colocamos os **argumentos**.
 ```{r , echo = TRUE}
 class(R)
 ```
 
-## R: Objetos
+## Objetos
+
+- No R existem diversos tipos de objetos.
 
 - **`character`**
 ```{r, echo=TRUE}
-uma_palavra <- "palavra"
-class(uma_palavra)
+o3_nome <- "ozônio"
+class(o3_nome)
 ```
 - **`numeric`**
 ```{r, echo=TRUE}
-this_year <- 2022
+this_year <- 2024
 g <- 9.81 # m/s2
 class(this_year)
 class(g)
 ```
 
-## R: Objetos 
+## Objetos 
 
 - `booleans`
 ```{r , echo = T}
@@ -168,18 +174,17 @@ muito_falso
 ```
 
 
-## R: Objetos - Vetores
-- É definido usando a função **`c()`**
+## Vetores
+- É definido usando a função **`c()`**. Só podem ter um único tipo de objeto.
 ```{r, echo=TRUE}
 pontos_cardeais <- c("N", "E", "S", "W")
-pontos_cardeais
+pontos_cardeais # só character
 pontos_cardeais_graus <- c(0, 90, 180, 270)
-class(pontos_cardeais_graus)
-
+class(pontos_cardeais_graus) # só numeric
 ```
 
-## R: Objetos - Vetores
-- Uma sequência é definida **`seq(inicio, final, intervalo)`**
+## Vetores
+- Uma \alert{sequência} é definida **`seq(inicio, final, intervalo)`**
 ```{r, echo=T}
 de_1ate5 <- seq(1, 5)
 de_1ate5
@@ -187,166 +192,42 @@ pares_ate10 <- seq(0, 10, 2)
 pares_ate10
 sec_float <- seq(0, 1, 0.2)
 sec_float
-
 ```
 
-## R:Objetos - vetores - Seleção de elementos
-- Para selecionar elementos do vetor: **`nombre_vetor[posição]`**:
+## Vetores
+- Para \alert{selecionar} elementos do vetor: **`nombre_vetor[posição]`**:
 ```{r, echo=T}
 # Primeiro elemento
 pontos_cardeais_graus[1]
 # Último elemento
 pontos_cardeais_graus[4]
-
 ```
 
 
-## R:Objetos - vetores - Seleção de elementos
+## Vetores
 
-- Podemos selecionar varios elementos usando **`outro vetor`**
+- Podemos \alert{selecionar} varios elementos usando **`outro vetor`**
 ```{r , echo=T}
 # Segundo y tercero
 pontos_cardeais[c(2, 3)]
-
 ```
-- Podemos eliminar elementos usando **`nome_vetor[-posição]`**
+- Podemos \alert{eliminar} elementos usando **`nome_vetor[-posição]`**
 ```{r, echo=T}
 GEE <- c("H2O", "CO2", "O2", "CH4")
-GEE
-# Oxigênio não é GEE
-GEE[-3]
+GEE 
+GEE[-3] # Oxigênio não é GEE
 ```
 
-## R:Objetos - vetores - Substituição
+## Vetores
 
 - Podemos Substituir um elemento do vetor assim:
 ```{r, echo=T}
 # Reemplazamos Oxígeno por Ozone
 GEE[3] <- "O3"
 GEE
-
 ```
 
-## R: Objetos - `data frames`
-- Um `data frame` é uma **tabela**
-- Uma matriz **indexada**: tem nomes das **colunas** e **linhas**.
-- Cada **coluna** é uma **variable**.
-- Cada **linha** é uma **observação**.
-- Um conjunto de vetores.
-
-## R: Objetos - `data frame`
-- Criamos um **`data frame`** usando a função **`data.frame()`**
-```{r , echo=TRUE}
-gases <- c("N2", "O2", "Ar", "CO2")
-massa_molar <- c(28, 32, 40, 12 + 2 * 16)
-percentagem <- c(78.08, 20.95, 0.9, 0.04)
-
-ar <- data.frame(gas = gases,
-                 W = massa_molar,
-                 per = percentagem)
-ar
-
-```
-
-## R: Objetos - `data frame`
-- Criamos um **`data frame`** usando a função **`data.frame()`**
-```{r , echo=TRUE}
-# Ou diretamente
-ar <- data.frame(gas = c("N2", "O2", "Ar", "CO2"),
-                 W = c(28, 32, 40, 12 + 2 * 16),
-                 per = c(78.08, 20.95, 0.9, 0.04))
-ar
-
-```
-
-
-## R: data frame - **`$`** (dolar sign)
-- Selecionamos uma **coluna** de un **`data frame`** como um **`vetor`**
-- Sintaxis: `df$nome_coluna`
-- E.g. Nome dos componentes do ar
-```{r, echo=T}
-ar$gas
-class(ar$gas)
-```
-
-## R: data frame - **`[]`** (colchetes?)
-- Selecionamos uma **coluna** de un **`data frame`** como um **`data frame`**
-- Sintaxis: `df[interiro]` ou `df[nome_coluna]`
-- E.g. Nome dos componentes do ar
-```{r, echo=T}
-ar[1] # ou ar["gas"]
-class(ar[1]) 
-```
-- **Atenção!**: `ar[1]` $\neq$ `ar$gas` 
-
-
-## R: data frame - **`$`** (signo de dolar)
-- Algumas funcções precisam `vetores` como **input**
-- e.g. média massa molar
-```{r, echo=T}
-mean(ar["W"])
-mean(ar$W)
-```
-
-## R: data frame - Criando novas colunas
-- Usamos **`$`**: **`df$nova_coluna <- `**
-- Nome completo dos gases:
-```{r, echo=T}
-ar$name <- c("Nitrogênio",
-             "Oxigênio",
-             "Argônio", 
-             "Diôxido de Carbono")
-ar
-
-```
-
-## R: data frame - Algumas funções
-- Número de linhas: **`nrow()`**
-- Número de colunas: **`ncol()`**
-```{r, echo=T}
-nrow(ar)
-ncol(ar)
-```
-
-## R: data frame - Algumas funções
-- Tipo de objeto de cada coluna: **`str()`**
-```{r, echo=T}
-str(ar)
-```
-- nome das colunas
-```{r, echo=T}
-names(ar)
-```
-
-
-## R: data.frame - Algunas funciones
-- Primeiras observações: **`head()`**
-- ùltimas observações: **`tail()`**
-```{r, echo=T}
-head(ar)
-tail(ar)
-```
-
-## R: data.frame - Algunas funciones
-- Primeiras observações: **`head()`**
-- ùltimas observações: **`tail()`**
-```{r, echo=T}
-head(ar, 2)
-tail(ar, 2)
-```
-
-## R: data.frame - Substituição
-```{r, echo=T}
-# Em espanhol
-ar$nombres <- c("Nitrógeno", 
-                "Oxígeno",
-                "Argón", 
-                "Dióxido de carbono")
-ar
-
-```
-
-## R: Operaciones *Element-wise* 
+## Operações *Element-wise* 
 ```{r, echo=T}
 tempC <- c(27, 32, 28, 26)
 tempK <- tempC + 273.15
@@ -357,82 +238,250 @@ str(tempk_chr)
 ```
 
 
-## AAA
-### Bulleted Lists
-- Element A
-- Element B
-    - B.1
-    - B.2
-- Element C    
+# Data Frames
 
-# Elements
+## R: Objetos - `data frames`
+- Um `data frame` é uma **tabela**
+- Uma matriz **indexada**: tem nomes das **colunas** e **linhas**.
+- Cada **coluna** é uma **variable**.
+- Cada **linha** é uma **observação**.
+- Um conjunto de vetores.
 
-## Typography
+##  `data frame`
+- Criamos um **`data frame`** usando a função **`data.frame()`**
+```{r , echo=TRUE}
+gases <- c("N2", "O2", "Ar", "CO2")
+massa_molar <- c(28, 32, 40, 12 + 2 * 16)
+percentagem <- c(78.08, 20.95, 0.9, 0.04)
 
-```
-The theme provides sensible defaults to
-\emph{emphasize} text, \alert{accent} parts
-or show \textbf{bold} results.
-
-In Markdown, you can also use _emphasize_ and **bold**.
-```
-
-\begin{center}becomes\end{center}
-
-The theme provides sensible defaults to \emph{emphasize} text,
-\alert{accent} parts or show \textbf{bold} results.
-
-In Markdown, you can also use _emphasize_ and **bold**.
-
-
-## Math
-
-\begin{equation*}
-    e = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
-\end{equation*}
-
-
-## R Figure Example
-
-The following code generates the plot on the next slide (taken from
-`help(bxp)` and modified slightly):
-
-```{r pressureCode, eval=FALSE}
-library(stats)
-set.seed(753)
-bx.p <- boxplot(split(rt(100, 4),
-                      gl(5, 20)), plot=FALSE)
-bxp(bx.p, notch = FALSE, boxfill = "lightblue",
-    frame = FALSE, outl = TRUE,
-    main = "Example from help(bxp)")
-```  
-
-
-## R Figure Example
-  
-```{r pressureFig, echo=FALSE}
-library(stats)
-set.seed(753)
-bx.p <- boxplot(split(rt(100, 4),
-                      gl(5, 20)), plot=FALSE)
-bxp(bx.p, notch = FALSE, boxfill = "lightblue",
-    frame = FALSE, outl = TRUE,
-    main = "Example from help(bxp)")
-```  
-
-## R Table Example
-  
-A simple `knitr::kable` example:  
-
-```{r kableEx}
-knitr::kable(mtcars[1:5, 1:8],
-             caption="(Parts of) the mtcars dataset")
+ar <- data.frame(gas = gases,
+                 W = massa_molar,
+                 per = percentagem)
 ```
 
-## Resources
 
-### For more information:
-- See the [Metropolis repository](https://github.com/matze/mtheme) for more on Metropolis
-- See the [RMarkdown repository](https://github.com/rstudio/rmarkdown) for more on RMarkdown
-- See the [binb repository](https://github.com/eddelbuettel/binb) for more on binb 
-- See the [binb vignettes](https://github.com/eddelbuettel/binb/vignettes) for more examples.
+## `data frame`
+```{r}
+ar
+```
+
+## `data frame`
+- Criamos um **`data frame`** usando a função **`data.frame()`**
+```{r , echo=TRUE}
+ar <- data.frame(gas = c("N2", "O2", "Ar", "CO2"), # Ou diretamente
+                 W = c(28, 32, 40, 12 + 2 * 16),
+                 per = c(78.08, 20.95, 0.9, 0.04))
+
+```
+
+## `data frame`
+```{r}
+ar
+```
+
+
+## Selecionar colunas **`$`**
+- Selecionamos uma **coluna** de un **`data frame`** como um **`vetor`**
+- Sintaxis: `df$nome_coluna`
+- E.g. Nome dos componentes do ar
+```{r, echo=T}
+ar$gas
+class(ar$gas)
+```
+
+## Selecionar filas e colunas **`[]`**
+- Selecionamos uma **coluna** de un **`data frame`** como um **`data frame`**
+- Sintaxis: `df[interiro]` ou `df[nome_coluna]`
+- E.g. Nome dos componentes do ar
+```{r, echo=T}
+ar[1] # ou ar["gas"]
+class(ar[1]) 
+```
+- **Atenção!**: `ar[1]` $\neq$ `ar$gas` 
+
+
+## Selecionar filas e colunas **`[]`**
+- Algumas funcções precisam `vetores` como **input**
+- e.g. média massa molar
+```{r, echo=T}
+mean(ar["W"])
+mean(ar$W)
+```
+
+## Criando novas colunas
+- Usamos **`$`**: **`df$nova_coluna <- nova_coluna`**
+```{r, echo=T}
+# Adicionamos o nome completo dos gases.
+ar$name <- c("Nitrogênio",
+             "Oxigênio",
+             "Argônio", 
+             "Diôxido de Carbono")
+ar
+```
+
+## Algumas funções importantes
+- Número de linhas: **`nrow()`**
+- Número de colunas: **`ncol()`**
+```{r, echo=T}
+nrow(ar)
+ncol(ar)
+```
+
+## Algumas funções importantes
+- Tipo de objeto de cada coluna: **`str()`**
+```{r, echo=T}
+str(ar)
+```
+- nome das colunas
+```{r, echo=T}
+names(ar)
+```
+
+
+## Algunas funciones importantes
+- Primeiras observações: **`head()`**
+- ùltimas observações: **`tail()`**
+```{r, echo=T}
+head(ar)
+tail(ar)
+```
+
+## Algunas funciones importantes
+- Primeiras observações: **`head()`**
+- Últimas observações: **`tail()`**
+```{r, echo=T}
+head(ar, 2)
+tail(ar, 2)
+```
+
+## Substituição de coluna
+- Para subsituir uma coluna, ela tem que ter \alert{o mesmo número de filas}.
+```{r, echo=T}
+# Em espanhol
+ar$nombres <- c("Nitrógeno", 
+                "Oxígeno",
+                "Argón", 
+                "Dióxido de carbono")
+ar
+
+```
+
+
+## `data frames`: Ler arquivos `.csv`
+
+- Vamos ler dados do ano 2023 do aeroporto de Guraulhos.
+- Os dados são baixados do site [**ASOS Network da Iowa State University**](https://mesonet.agron.iastate.edu/request/download.phtml?network=BR__ASOS).
+- No R para leer tabelas em csv (e para outros formatos) usamos a função \alert{`read.table()`}.
+- Esta função precisa saber a **ubicação do arquivo**. Para isso usamos a função **`file.choose()`**.
+
+## `data frames` Ler arquivos `.csv`
+
+```{r}
+gru <- read.table("../../data/SBGR.csv", # ou file.choose()
+                  header = TRUE, # se as colunas tem nome
+                  sep = ",", # o separador de colunas
+                  dec = ".") # o separador decimal
+```
+
+## `data frames` Ler arquivos `.csv`
+- Exploramos o conteúdo do data frame:
+```{r}
+names(gru)
+```
+
+## `data frames` Ler arquivos `.csv`
+```{r}
+str(gru)
+```
+
+## Operações
+- A temperatura está em Farenheit e a velocidade de vento está em nós.
+```{r}
+gru$tc <- (gru$tmpf - 32) * 5 / 9
+```
+
+## Operações
+- A temperatura está em Farenheit e a velocidade de vento está em nós.
+```{r}
+gru$ws <- gru$sknt * 0.51
+```
+
+## Análise exploratória de dados (AED)
+- Vamos olhar os estatísticos básicos usando `summary()` da temperatura, velocidade do vento, umidade do ar.
+```{r}
+summary(gru[c("tc", "relh", "ws")])
+```
+
+## Análise exploratória de dados (AED)
+- Ou podemos calcular _manualmente_:
+```{r}
+mean(gru$tc, na.rm = TRUE) # na.rm = TRUE não considera NA
+median(gru$tc, na.rm = TRUE)
+```
+
+## Análise exploratória de dados (AED)
+```{r}
+max(gru$tc, na.rm = TRUE)
+min(gru$tc, na.rm = TRUE)
+sd(gru$tc, na.rm = TRUE)
+```
+
+## Um plot simples
+```{r, eval=FALSE}
+plot(gru$tc, # vetor para plotar
+     t = "l", # tipo de plot, l = linha
+     xlab = "2023", # nome do eixo x
+     ylab = "Temperatura (C)", # nome eixo y
+     col = "orange", # color da linha
+     lwd = 1.25 # largura linha
+     )
+```
+
+## Um plot simples
+```{r, echo=FALSE}
+plot(gru$tc, 
+     t = "l",
+     xlab = "2023",
+     ylab = "Temperatura (C)",
+     col = "orange",
+     lwd = 1.25)
+```
+
+## Histograma
+```{r}
+hist(gru$tc)
+```
+
+## Um diagrama de caixa
+```{r}
+boxplot(gru$tc)
+```
+
+## Um _scatter plot_
+```{r, eval=FALSE}
+plot(gru$tc, # valores eixo x
+     gru$relh, # valores eixo y
+     col = "lightblue", # color dos pontos
+     xlab = "Temperatura (C)", # nome eixo x
+     ylab = "Umidade relativa (%)" # nome eixo y
+     )
+```
+
+## Um _scatter plot_
+```{r, echo=FALSE}
+plot(gru$tc, # valores eixo x
+     gru$relh, # valores eixo y
+     pch = 19, # tipo de ponto
+     col = "lightblue", # color dos pontos
+     xlab = "Temperatura (C)", # nome eixo x
+     ylab = "Umidade relativa (%)" # nome eixo y
+     )
+```
+
+## Coeficiente de correlação
+```{r}
+cor(gru$tc, # variavel x
+    gru$relh) # variavel y
+```
+
+
