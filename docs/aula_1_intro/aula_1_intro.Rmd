@@ -112,7 +112,7 @@ knitr::include_graphics('figures/TTM.jpg')
 
 ## R como calculadora
 
-- R pode ser usado como calculadora. 
+- R é uma calculadora. 
 - Segue a ordem das operações
 ```{r, echo=TRUE}
 (5 + 10 * 2 / 4) ^ 2 - 5
