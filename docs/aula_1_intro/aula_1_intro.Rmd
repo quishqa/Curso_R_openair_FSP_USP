@@ -17,7 +17,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## Por que o curso?
 
-* Analizadores de poluentes mendem concentrações com maior frequência.
+* Analizadores de poluentes medem concentrações com maior frequência.
 * R é uma ótima ferramenta para mexer com dados.
 * É importante conhecer uma linguagem de programação.
 
