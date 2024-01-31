@@ -1,0 +1,120 @@
+---
+title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
+author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
+date: 06/02/2024
+institute: Universidade de São Paulo
+output: binb::metropolis
+fontsize: 12pt
+classoption: aspectratio=169 
+toc: true
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+# Pacotes
+
+## Pacotes
+
+- Pacotes são como as \alert{extensões} no browser.
+- Conjunto de funções específicas para tarefas específicas.
+
+## Bibliotecas
+- Para instalar pacotes usamos a função `install.packages("nome_do_biblioteca")`
+```{r, eval=FALSE}
+# Instalando Rmarkdown
+install.packages("rmarkdown")
+```
+
+## Bibliotecas
+- Por exemplo, para ler arquivos `.xls` podemos instalar a biblioteca `readxls`
+```{r, eval=FALSE}
+# Instalando readxl
+install.packages("readxl")
+```
+
+# Do Excel para R
+
+## Do Excel para R
+- Um jeito de ler arquivos `.xls` é abrir os arquivos em Excel ou Google Sheet e salvar como `.csv`.
+- Depois ler a tabela usando a função `read.table()`
+- As vezes vale a pena abrir no Excel ou Google Sheet e mudar o nome das colunas.
+- Também podemos usar a função `read_excel()` do pacote `readxl`
+
+## Base de dados da WHO
+- Vamos usar a [base de dados de qualidade do ar da WHO](https://www.who.int/data/gho/data/themes/air-pollution/who-air-quality-database/2022)
+```{r}
+library(readxl)
+who <- read_excel("../../data/who_aap_2021_v9_11august2022.xlsx",
+                  sheet = 2) # Nome o numero do sheet no arquivo
+```
+
+## Base de dados da WHO
+
+- Este é um exemplo de nomes de coluna _complicados_.
+```{r}
+str(who)
+```
+
+# Subset data frames
+
+## Subset 
+- As vezes precisamos selecionar um sub-conjunto de dados do data frame.
+- Um jeito simples é usar a função `subset()`
+```{r, eval=FALSE}
+novo_df <- subset(df_original,
+                  subset = condição baseado nas filas,
+                  select = vetor com as colunas)
+
+```
+
+## Subset dados da who para Brasil
+- Vamos selecionar os dados do Brasil.
+```{r}
+who_br <- subset(who,
+                 subset = `WHO Country Name` == "Brazil")
+```
+
+- Olha como o nome da coluna que tem espaços é escrita usando \` \`. 
+
+## Subset dados da who para Brasil
+- Vamos selecionar os dados do Brasil.
+```{r}
+# Examinando o novo data frame
+nrow(who_br)
+head(unique(who_br$`City or Locality`))
+```
+
+- Olha como o nome da coluna que tem espaços é escrita usando \` \`. 
+
+## Subset dados da WHO para Sao Paulo
+
+```{r}
+who_sp <-  subset(who,
+                  subset = `City or Locality` == "Sao Paulo" ,
+                  select = c("Measurement Year", 
+                             "PM2.5 (μg/m3)",
+                             "PM10 (μg/m3)",
+                             "NO2 (μg/m3)" ))
+```
+
+## Subset dados da WHO para Sao Paulo
+
+- Vamos arrumar um pouco o data frame
+```{r}
+names(who_sp)
+names(who_sp) <- c("year", "pm25", "pm10", "no2")
+names(who_sp)
+```
+
+## Anos acima do standard da WHO
+```{r, out.width="50%"}
+plot(who_sp$year, who_sp$no2, t = "l", lwd = 1.5, 
+     xlab = "Anos", ylab = "NO2 (ug/m3)")
+abline(h = 40, lwd = 1.5, col = "red")
+legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
+```
+
+
+# qualR
