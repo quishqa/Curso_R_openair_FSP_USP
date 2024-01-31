@@ -45,7 +45,7 @@ include_graphics("figures/Rlogo.png")
 ::: columns
 
 :::: column
-- É _open source_ (é **libre**).
+- É _open source_ (é **livre**).
 - Funciona em qualquer **sistema operacional**.
 - Podemos trabalhar **com muitos dados** e **tipos**.
 - Grande comunidade de usuários: **Muita ajuda on-line**.
