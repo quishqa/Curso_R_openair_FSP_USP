@@ -22,3 +22,8 @@ who_sp <-  subset(who,
                              "PM2.5 (μg/m3)",
                              "PM10 (μg/m3)",
                              "NO2 (μg/m3)" ))
+
+# Cities over NO2 aqs
+who_19<- subset(who, subset = `Measurement Year` == 2019)
+who_no2_19 <- subset(who_19,
+                     subset = `NO2 (μg/m3)` >= 40)

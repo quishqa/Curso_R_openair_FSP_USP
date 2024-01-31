@@ -116,5 +116,17 @@ abline(h = 40, lwd = 1.5, col = "red")
 legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
 ```
 
+## Exercicio
+
+- Que cidades ultrapassarm o Padrão de qualidade do ar de NO2 no ano 2019?
 
 # qualR
+
+## qualR
+
+- Pacote desenvolvido para baixar os dados da CETESB dentro do R.
+- Gera dataset prontos e completos para análise:
+  - Horários faltantes preenchidos com `NA`.
+  - Coluna `date` tipo `POSIXct` para usar diretamente com `openair`.
+- Precisa de ter cadastro na plataforma [QUALAR da CETESB](https://qualar.cetesb.sp.gov.br/qualar/home.do).
+- Referencia [qualR](https://github.com/ropensci/qualR)
