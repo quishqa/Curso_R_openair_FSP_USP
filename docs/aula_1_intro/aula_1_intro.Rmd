@@ -206,7 +206,7 @@ pontos_cardeais_graus[4]
 
 ## Vetores
 
-- Podemos \alert{selecionar} varios elementos usando **`outro vetor`**
+- Podemos \alert{selecionar} vários elementos usando **`outro vetor`**
 ```{r , echo=T}
 # Segundo y tercero
 pontos_cardeais[c(2, 3)]
@@ -243,7 +243,7 @@ str(tempk_chr)
 ## R: Objetos - `data frames`
 - Um `data frame` é uma **tabela**
 - Uma matriz **indexada**: tem nomes das **colunas** e **linhas**.
-- Cada **coluna** é uma **variable**.
+- Cada **coluna** é uma **variável**.
 - Cada **linha** é uma **observação**.
 - Um conjunto de vetores.
 
@@ -338,7 +338,7 @@ names(ar)
 ```
 
 
-## Algunas funciones importantes
+## Algumas funções importantes
 - Primeiras observações: **`head()`**
 - ùltimas observações: **`tail()`**
 ```{r, echo=T}
@@ -346,7 +346,7 @@ head(ar)
 tail(ar)
 ```
 
-## Algunas funciones importantes
+## Algumas funções importantes
 - Primeiras observações: **`head()`**
 - Últimas observações: **`tail()`**
 ```{r, echo=T}
@@ -369,9 +369,9 @@ ar
 
 ## `data frames`: Ler arquivos `.csv`
 
-- Vamos ler dados do ano 2023 do aeroporto de Guraulhos.
+- Vamos ler dados do ano 2023 do aeroporto de Guarulhos.
 - Os dados são baixados do site [**ASOS Network da Iowa State University**](https://mesonet.agron.iastate.edu/request/download.phtml?network=BR__ASOS).
-- No R para leer tabelas em csv (e para outros formatos) usamos a função \alert{`read.table()`}.
+- No R para ler tabelas em csv (e para outros formatos) usamos a função \alert{`read.table()`}.
 - Esta função precisa saber a **ubicação do arquivo**. Para isso usamos a função **`file.choose()`**.
 
 ## `data frames` Ler arquivos `.csv`
@@ -407,7 +407,7 @@ gru$ws <- gru$sknt * 0.51
 ```
 
 ## Análise exploratória de dados (AED)
-- Vamos olhar os estatísticos básicos usando `summary()` da temperatura, velocidade do vento, umidade do ar.
+- Vamos olhar as estatísticas básicas usando `summary()` da temperatura, velocidade do vento, umidade do ar.
 ```{r}
 summary(gru[c("tc", "relh", "ws")])
 ```
