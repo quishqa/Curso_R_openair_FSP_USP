@@ -26,9 +26,9 @@ knitr::opts_chunk$set(cache=TRUE)
 
 :::: column
 - R é uma **Linguagem de programação** para a análise de dados.
-   - Um sistema para **estatistica**.
-   - Um sistema de computação gráfica e **estatistica**.
-   - Um ambiente para a análise de dadose e **estatistica**.
+   - Um sistema para **estatística**.
+   - Um sistema de computação gráfica e **estatística**.
+   - Um ambiente para a análise de dadose e **estatística**.
 ::::
 
 :::: column
@@ -49,7 +49,7 @@ include_graphics("figures/Rlogo.png")
 - Funciona em qualquer **sistema operacional**.
 - Podemos trabalhar **com muitos dados** e **tipos**.
 - Grande comunidade de usuários: **Muita ajuda on-line**.
-- **Reproducibilidade** das ciências.
+- **Reprodutibilidade** das ciências.
 ::::
 
 :::: column
