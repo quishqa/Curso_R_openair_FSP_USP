@@ -222,7 +222,7 @@ GEE[-3] # Oxigênio não é GEE
 
 - Podemos Substituir um elemento do vetor assim:
 ```{r, echo=T}
-# Reemplazamos Oxígeno por Ozone
+# Substituimos Oxigênio por Ozônio
 GEE[3] <- "O3"
 GEE
 ```
@@ -281,7 +281,7 @@ ar
 
 
 ## Selecionar colunas **`$`**
-- Selecionamos uma **coluna** de un **`data frame`** como um **`vetor`**
+- Selecionamos uma **coluna** de um **`data frame`** como um **`vetor`**
 - Sintaxis: `df$nome_coluna`
 - E.g. Nome dos componentes do ar
 ```{r, echo=T}
@@ -290,7 +290,7 @@ class(ar$gas)
 ```
 
 ## Selecionar filas e colunas **`[]`**
-- Selecionamos uma **coluna** de un **`data frame`** como um **`data frame`**
+- Selecionamos uma **coluna** de um **`data frame`** como um **`data frame`**
 - Sintaxis: `df[interiro]` ou `df[nome_coluna]`
 - E.g. Nome dos componentes do ar
 ```{r, echo=T}
@@ -301,7 +301,7 @@ class(ar[1])
 
 
 ## Selecionar filas e colunas **`[]`**
-- Algumas funcções precisam `vetores` como **input**
+- Algumas funções precisam `vetores` como **input**
 - e.g. média massa molar
 ```{r, echo=T}
 mean(ar["W"])
@@ -372,7 +372,7 @@ ar
 - Vamos ler dados do ano 2023 do aeroporto de Guarulhos.
 - Os dados são baixados do site [**ASOS Network da Iowa State University**](https://mesonet.agron.iastate.edu/request/download.phtml?network=BR__ASOS).
 - No R para ler tabelas em csv (e para outros formatos) usamos a função \alert{`read.table()`}.
-- Esta função precisa saber a **ubicação do arquivo**. Para isso usamos a função **`file.choose()`**.
+- Esta função precisa saber a **localização do arquivo**. Para isso usamos a função **`file.choose()`**.
 
 ## `data frames` Ler arquivos `.csv`
 
