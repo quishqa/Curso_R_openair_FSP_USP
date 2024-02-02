@@ -134,7 +134,7 @@ legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
 
 ## Exercicio
 
--   Que cidades ultrapassarm o Padrão de qualidade do ar de NO2 no ano 2019?
+-   Quais cidades ultrapassarm o Padrão de qualidade do ar de NO2 no ano 2019?
 
 # qualR
 
@@ -144,7 +144,7 @@ legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
 -   Gera dataset prontos e completos para análise:
     -   Horários faltantes preenchidos com `NA`.
     -   Coluna `date` tipo `POSIXct` para usar diretamente com `openair`.
--   Precisa de ter cadastro na plataforma [QUALAR da CETESB](https://qualar.cetesb.sp.gov.br/qualar/home.do).
+-   Precisa ter cadastro na plataforma [QUALAR da CETESB](https://qualar.cetesb.sp.gov.br/qualar/home.do).
 -   Referencia [qualR](https://github.com/ropensci/qualR)
 
 ## Instalação qualR
@@ -201,7 +201,7 @@ pin_o3 <- cetesb_retrieve_param(
 
 ## Baixar um poluente de uma estação
 
--   Também aceita o nome da estação (igual do que em `cetesb_aqs`) e o nome do parâmetro (igual do que em `cetesb_param`).
+-   Também aceita o nome da estação (igual  em `cetesb_aqs`) e o nome do parâmetro (igual em `cetesb_param`).
 
 ```{r, eval=FALSE}
 pin_o3 <- cetesb_retrieve_param(
@@ -214,9 +214,9 @@ pin_o3 <- cetesb_retrieve_param(
 )
 ```
 
-## Baixar vários poluente de uma estação
+## Baixar vários poluentes de uma estação
 
--   Também podemos baixar vários poluentes de uma estação. Só precisamos definir os poluentes para baixar em un `vetor`. Vamos baixar O$_3$, PM$_{2.5}$, e NO$_X$.
+-   Também podemos baixar vários poluentes de uma estação. Só precisamos definir os poluentes para baixar em um `vetor`. Vamos baixar O$_3$, PM$_{2.5}$, e NO$_X$.
 
 ```{r, eval=FALSE}
 pols <- c("O3", "MP2.5", "NOx") # Olhar usando cetesb_aqs
@@ -264,7 +264,7 @@ pin_pm25 <- cetesb_retrieve_param(
 
 
 ## Salvar dados em `.csv`
-- Pode ser que você precisar usar outro software (e.g. [PMF](https://www.epa.gov/air-research/positive-matrix-factorization-model-environmental-data-analyses)). Então você pode usar exportar os dados em `.csv`. Só adicionar o argumento `to_csv = TRUE`.
+- Pode ser que você precise usar outro software (e.g. [PMF](https://www.epa.gov/air-research/positive-matrix-factorization-model-environmental-data-analyses)). Então você pode exportar os dados em `.csv`. Só adicionar o argumento `to_csv = TRUE`.
 ```{r, eval=FALSE}
 params <- c("MP2.5", "VV", "DV") # Olhar usando cetesb_aqs
 pin_pm25 <- cetesb_retrieve_param(
@@ -279,9 +279,9 @@ pin_pm25 <- cetesb_retrieve_param(
 ```
 
 ## Salvar dados em `.csv`
-- O arquivo salvado tem o nome  `Pinheiros_MP2.5_VV_DV_01-01-2024_07-01-2024.csv` e ficará na pasta de trabalho (conferir usando `getwd()`).
+- O arquivo salvo tem o nome  `Pinheiros_MP2.5_VV_DV_01-01-2024_07-01-2024.csv` e ficará na pasta de trabalho (conferir usando `getwd()`).
 
-## Um poluente várias estações
+## Um mesmo poluente de várias estações
 - As vezes você precisa de comparar valores de várias estações. Neste exemplo vamos baixar valores de NO$_X$ da estação Ibirapuera e Pinheiros.
 ```{r}
 aqs <- c(99, 83) # de cetesb_aqs, Pinheiros é 99 e Ibirapuera 83
@@ -296,20 +296,20 @@ nox_pin_ibi <- lapply(
 )
 ```
 
-## Um poluente várias estações
+## Um mesmo poluente de várias estações
 - O resultado de usar `lapply` é uma lista. Vamos a transformar em um `data.frame`.
 ```{r}
 nox_all <- do.call(rbind, nox_pin_ibi)
 ```
 
-## Um poluente várias estações
+## Um mesmo poluente de várias estações
 - Usando subset podemos separar os data frames.
 ```{r}
 nox_pin <- subset(nox_all, subset = aqs == "Pinheiros")
 nox_ibi <- subset(nox_all, subset = aqs == "Ibirapuera")
 ```
 
-##  Um poluente várias estações
+##  Um mesmo poluente de várias estações
 - Vamos comparar as estações
 ```{r}
 mean(nox_pin$nox, na.rm = TRUE)
@@ -320,7 +320,7 @@ mean(nox_ibi$nox, na.rm = TRUE)
 ## Outras funções.
 
 - `cetesb_retrieve_param()` é a função mais importante e a mais usada.
-- Existem outras funçãoes que não precisam do argumento `parameters` pois foram disenhados para baixar parâmetros específicos:
+- Existem outras funçãoes que não precisam do argumento `parameters` pois foram desenvolvidas para baixar parâmetros específicos:
     - `cetesb_retrieve_pol()`: Baixa todos os \alert{poluentes}.
     - `cetesb_retrieve_met()`: Baixa todos os \alert{parâmetros meteorológicos}.
     - `cetesb_retrieve_met_pol()`: Baixa todos os \alert{parâmetros da estação}.
@@ -329,9 +329,9 @@ mean(nox_ibi$nox, na.rm = TRUE)
 
 ## Plots
 
-- _Uma figura vale mais do que 100 palabras_.
-- Vamos aprofundizar como usar **R Base Graphics** para criar os plots.
-- Seguires as _10 simple rules for better figures_ do [**Rougier et al. (2014)**](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
+- _Uma figura vale mais do que 100 palavras_.
+- Vamos aprofundar como usar **R Base Graphics** para criar os plots.
+- Seguir as _10 simple rules for better figures_ do [**Rougier et al. (2014)**](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
 
 ## Plots
 
@@ -342,7 +342,7 @@ mean(nox_ibi$nox, na.rm = TRUE)
     - `boxplot()`: Diagrama de caixas.
     
 ## Séries temporais
-- Vamos a plotar a série temporal da concentrações de pm10.
+- Vamos plotar a série temporal da concentrações de pm10.
 ```{r, out.height="60%"}
 plot(who_sp$year, who_sp$pm10)
 ```
@@ -485,7 +485,7 @@ barplot(who_sp$pm10, names.arg = who_sp$year,
 
 ## Diagrama de barras.
 - Comparemos com PM$_{2.5}$.
-- Primeiro temos que transformar nosso dato em matriz.
+- Primeiro temos que transformar nosso dado em matriz.
 ```{r}
 pm <- subset(who_sp, select = c("pm10", "pm25"))
 pm_m  <- t(as.matrix(pm))
@@ -493,7 +493,7 @@ pm_m  <- t(as.matrix(pm))
 
 ## Diagrama de barras.
 - Comparemos com PM$_{2.5}$.
-- Primeiro temos que transformar nosso dato em matriz.
+- Primeiro temos que transformar nosso dado em matriz.
 ```{r, eval=FALSE}
 barplot(pm_m, beside = TRUE, border = TRUE, 
         col = c("cadetblue", "tomato"),
@@ -505,7 +505,7 @@ legend("topright", legend = c("PM10", "PM2.5"),
 
 ## Diagrama de barras.
 - Comparemos com PM$_{2.5}$.
-- Primeiro temos que transformar nosso dato em matriz.
+- Primeiro temos que transformar nosso dado em matriz.
 ```{r, echo=FALSE}
 barplot(pm_m, beside = TRUE, border = TRUE, 
         col = c("cadetblue", "tomato"),
