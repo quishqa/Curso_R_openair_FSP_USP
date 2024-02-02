@@ -89,7 +89,7 @@ include_graphics("figures/rstudio-panes-labeled.jpeg")
 ## RStudio
 - É importante aprender os _keyboard shortcuts_.
    - `Ctrl + 1` : Janela scripts.
-   - `Ctrl + 2` : Janela consola.
+   - `Ctrl + 2` : Janela console.
    - `Alt + - ` : `<-`
    - `TAB`: Autocompleta nome de funções e direções de arquivos.
 
