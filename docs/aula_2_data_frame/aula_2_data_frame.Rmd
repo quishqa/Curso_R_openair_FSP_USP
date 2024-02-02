@@ -149,7 +149,7 @@ legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
 
 ## Instalação qualR
 
--   O jeito mais fácil é o seguinte:
+- O jeito mais fácil é o seguinte:
 
 ```{r, eval=FALSE}
 install.packages('qualR', 
@@ -317,4 +317,149 @@ mean(nox_ibi$nox, na.rm = TRUE)
 ```
 - Pinheiros tem maior concentração de NOX do que Ibirapuera. Por que?
 
+## Outras funções.
+
+- `cetesb_retrieve_param()` é a função mais importante e a mais usada.
+- Existem outras funçãoes que não precisam do argumento `parameters` pois foram disenhados para baixar parâmetros específicos:
+    - `cetesb_retrieve_pol()`: Baixa todos os \alert{poluentes}.
+    - `cetesb_retrieve_met()`: Baixa todos os \alert{parâmetros meteorológicos}.
+    - `cetesb_retrieve_met_pol()`: Baixa todos os \alert{parâmetros da estação}.
+    
 # Plots
+
+## Plots
+
+- _Uma figura vale mais do que 100 palabras_.
+- Vamos aprofundizar como usar **R Base Graphics** para criar os plots.
+- Seguires as _10 simple rules for better figures_ do [**Rougier et al. (2014)**](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
+
+## Plots
+
+- A principal função é **`plot()`**. Podemos usar `plot()` para criar \alert{séries de tempo} e \alert{gráfico de dispersão}.
+- Outras função são:
+    - `hist()`: Cria histogramas.
+    - `barplot()`: Diagrama de barras.
+    - `boxplot()`: Diagrama de caixas.
+    
+## Séries temporais
+- Vamos a plotar a série temporal da concentrações de pm10.
+```{r, out.height="60%"}
+plot(who_sp$year, who_sp$pm10)
+```
+
+
+## Séries temporais
+```{r, eval=FALSE}
+plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
+     t = "l", # tipo linha
+     lwd = 2.5, # largura da linha
+     col = "orange", # color da linha
+     ylim = c(25, 40), # limite do eixo x
+     xlab = "Anos",  # nome eixo x
+     ylab = "PM10 [ug/m3]", # nome eixo y 
+     main = "São Paulo" # titulo do plot
+     )
+```
+## Séries temporais
+```{r, echo=FALSE}
+plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
+     t = "l", # tipo linha
+     lwd = 2.5, # largura da linha
+     col = "orange", # color da linha
+     ylim = c(25, 40), # limite do eixo x
+     xlab = "Anos",  # nome eixo x
+     ylab = "PM10 [ug/m3]",# 
+     main = "São Paulo"
+     )
+```
+
+## Séries temporais
+- Podemos adicionar pontos 
+```{r, eval=FALSE}
+plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
+     t = "l", # tipo linha
+     lwd = 2.5, # largura da linha
+     col = "orange", # color da linha
+     ylim = c(25, 40), # limite do eixo x
+     xlab = "Anos",  # nome eixo x
+     ylab = "PM10 [ug/m3]",# 
+     main = "São Paulo"
+     )
+points(who_sp$year, who_sp$pm10,
+       pch = 19, # tipo do ponto
+       col = "orange") # color do ponto
+```
+
+## Séries temporais
+- Podemos adicionar pontos 
+```{r, echo=FALSE}
+plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
+     t = "l", # tipo linha
+     lwd = 2.5, # largura da linha
+     col = "orange", # color da linha
+     ylim = c(25, 40), # limite do eixo x
+     xlab = "Anos",  # nome eixo x
+     ylab = "PM10 [ug/m3]",# 
+     main = "São Paulo"
+     )
+points(who_sp$year, who_sp$pm10, col = "orange",
+       pch = 19 )# tipo do ponto
+```
+
+## Séries temporais
+- Adicionemos também PM$_{2.5}$
+```{r, eval=FALSE}
+plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
+     t = "l", lwd = 2.5, col = "orange", 
+     ylim = c(10, 40), # para visualizar valores de PM2.5
+     xlab = "Anos", main = "São Paulo",
+     ylab = "[ug/m3]") # So unidades
+points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
+# Adicionamos PM.25
+lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+```
+
+## Séries temporais
+- Adicionemos também PM$_{2.5}$
+```{r, echo=FALSE}
+plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
+     t = "l", lwd = 2.5, col = "orange", 
+     ylim = c(10, 40), # para visualizar valores de PM2.5
+     xlab = "Anos", main = "São Paulo",
+     ylab = "[ug/m3]") # So unidades
+points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+```
+
+## Séries temporais
+- Adicionemos também PM$_{2.5}$
+```{r, eval=FALSE}
+plot(who_sp$year, who_sp$pm10,t = "l", lwd = 2.5, col = "orange", 
+     ylim = c(10, 40), xlab = "Anos", main = "São Paulo", ylab = "[ug/m3]")
+points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+legend("topright", col = c("orange", "red"), lwd = 2.5, 
+       legend = c("PM10", "PM25"))
+```
+
+## Séries temporais
+- Adicionemos também PM$_{2.5}$
+```{r, echo=FALSE}
+plot(who_sp$year, who_sp$pm10,t = "l", lwd = 2.5, col = "orange", 
+     ylim = c(10, 40), xlab = "Anos", main = "São Paulo", ylab = "[ug/m3]")
+points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+# adicionamos legenda
+legend("topright", col = c("orange", "red"), lwd = 2.5, 
+       legend = c("PM10", "PM25"))
+```
+
+## Diagrama de barras.
+- Usamos a função `barplot()`.
+```{r, echo=FALSE}
+barplot(who_sp$pm10, names.arg = who_sp$year)
+```
