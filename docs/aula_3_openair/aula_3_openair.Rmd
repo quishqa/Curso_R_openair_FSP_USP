@@ -194,12 +194,17 @@ dev.off()
 
 ## 2° Exercício
   
-2) Transformar a média horária em média diária dos dados e exportar o arquivo em csv.
+2) Transformar a média horária em média diária. Exportar, em csv, dois arquivos (1 com dados diários e 1 horários).
+
 
 ```{r, eval=FALSE}
-diario <- timeAverage(dado, avg.time = "day") 
 write.csv(dado, 
-          "C:/Users/Rafaela/Dropbox/POSDOC/curso rstudio/dado_teste.csv", 
+          "C:/Users/Rafaela/Dropbox/POSDOC/curso rstudio/horario.csv", 
+          row.names = FALSE)
+
+diario <- timeAverage(dado, avg.time = "day") 
+write.csv(diario, 
+          "C:/Users/Rafaela/Dropbox/POSDOC/curso rstudio/diario.csv", 
           row.names = FALSE)
 ```
 
