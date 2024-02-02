@@ -353,7 +353,7 @@ plot(who_sp$year, who_sp$pm10)
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "orange", # color da linha
+     col = "cadetblue", # color da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]", # nome eixo y 
@@ -365,7 +365,7 @@ plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "orange", # color da linha
+     col = "cadetblue", # color da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]",# 
@@ -379,7 +379,7 @@ plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "orange", # color da linha
+     col = "cadetblue", # color da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]",# 
@@ -387,7 +387,7 @@ plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      )
 points(who_sp$year, who_sp$pm10,
        pch = 19, # tipo do ponto
-       col = "orange") # color do ponto
+       col = "cadetblue") # color do ponto
 ```
 
 ## Séries temporais
@@ -396,13 +396,13 @@ points(who_sp$year, who_sp$pm10,
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "orange", # color da linha
+     col = "cadetblue", # color da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]",# 
      main = "São Paulo"
      )
-points(who_sp$year, who_sp$pm10, col = "orange",
+points(who_sp$year, who_sp$pm10, col = "cadetblue",
        pch = 19 )# tipo do ponto
 ```
 
@@ -410,56 +410,107 @@ points(who_sp$year, who_sp$pm10, col = "orange",
 - Adicionemos também PM$_{2.5}$
 ```{r, eval=FALSE}
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
-     t = "l", lwd = 2.5, col = "orange", 
+     t = "l", lwd = 2.5, col = "cadetblue", 
      ylim = c(10, 40), # para visualizar valores de PM2.5
      xlab = "Anos", main = "São Paulo",
      ylab = "[ug/m3]") # So unidades
-points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
+points(who_sp$year, who_sp$pm10, col = "cadetblue", pch = 19 )
 # Adicionamos PM.25
-lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
-points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "tomato", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "tomato", pch = 19 )
 ```
 
 ## Séries temporais
 - Adicionemos também PM$_{2.5}$
 ```{r, echo=FALSE}
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
-     t = "l", lwd = 2.5, col = "orange", 
+     t = "l", lwd = 2.5, col = "cadetblue", 
      ylim = c(10, 40), # para visualizar valores de PM2.5
      xlab = "Anos", main = "São Paulo",
      ylab = "[ug/m3]") # So unidades
-points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
-lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
-points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+points(who_sp$year, who_sp$pm10, col = "cadetblue", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "tomato", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "tomato", pch = 19 )
 ```
 
 ## Séries temporais
 - Adicionemos também PM$_{2.5}$
 ```{r, eval=FALSE}
-plot(who_sp$year, who_sp$pm10,t = "l", lwd = 2.5, col = "orange", 
+plot(who_sp$year, who_sp$pm10,t = "l", lwd = 2.5, col = "cadetblue", 
      ylim = c(10, 40), xlab = "Anos", main = "São Paulo", ylab = "[ug/m3]")
-points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
-lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
-points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
-legend("topright", col = c("orange", "red"), lwd = 2.5, 
+points(who_sp$year, who_sp$pm10, col = "cadetblue", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "tomato", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "tomato", pch = 19 )
+legend("topright", col = c("cadetblue", "tomato"), lwd = 2.5, 
        legend = c("PM10", "PM25"))
 ```
 
 ## Séries temporais
 - Adicionemos também PM$_{2.5}$
 ```{r, echo=FALSE}
-plot(who_sp$year, who_sp$pm10,t = "l", lwd = 2.5, col = "orange", 
+plot(who_sp$year, who_sp$pm10,t = "l", lwd = 2.5, col = "cadetblue", 
      ylim = c(10, 40), xlab = "Anos", main = "São Paulo", ylab = "[ug/m3]")
-points(who_sp$year, who_sp$pm10, col = "orange", pch = 19 )
-lines(who_sp$year, who_sp$pm25, col = "red", lwd = 2.5)
-points(who_sp$year, who_sp$pm25, col = "red", pch = 19 )
+points(who_sp$year, who_sp$pm10, col = "cadetblue", pch = 19 )
+lines(who_sp$year, who_sp$pm25, col = "tomato", lwd = 2.5)
+points(who_sp$year, who_sp$pm25, col = "tomato", pch = 19 )
 # adicionamos legenda
-legend("topright", col = c("orange", "red"), lwd = 2.5, 
+legend("topright", col = c("cadetblue", "tomato"), lwd = 2.5, 
        legend = c("PM10", "PM25"))
 ```
 
 ## Diagrama de barras.
 - Usamos a função `barplot()`.
-```{r, echo=FALSE}
+```{r, out.height="65%"}
 barplot(who_sp$pm10, names.arg = who_sp$year)
+```
+
+## Diagrama de barras.
+- Usamos a função `barplot()`.
+```{r, eval=FALSE}
+barplot(who_sp$pm10,
+        names.arg = who_sp$year, # Nome das barras
+        col = "cadetblue", # Color das barras
+        border = FALSE,  # Sem borde das barras
+        main = "Concentração de PM10 em São Paulo")
+```
+
+## Diagrama de barras.
+- Usamos a função `barplot()`.
+```{r, echo=FALSE, out.height="65%"}
+barplot(who_sp$pm10, names.arg = who_sp$year, 
+        col = "cadetblue",
+        border = FALSE, 
+        main = "Concentração de PM10 em São Paulo")
+```
+
+## Diagrama de barras.
+- Comparemos com PM$_{2.5}$.
+- Primeiro temos que transformar nosso dato em matriz.
+```{r}
+pm <- subset(who_sp, select = c("pm10", "pm25"))
+pm_m  <- t(as.matrix(pm))
+```
+
+## Diagrama de barras.
+- Comparemos com PM$_{2.5}$.
+- Primeiro temos que transformar nosso dato em matriz.
+```{r, eval=FALSE}
+barplot(pm_m, beside = TRUE, border = TRUE, 
+        col = c("cadetblue", "tomato"),
+        names.arg = who_sp$year,
+        main = "Concentrações de PM em São Paulo")
+legend("topright", legend = c("PM10", "PM2.5"), 
+       pch = 15, col = c("cadetblue", "tomato"))
+```
+
+## Diagrama de barras.
+- Comparemos com PM$_{2.5}$.
+- Primeiro temos que transformar nosso dato em matriz.
+```{r, echo=FALSE}
+barplot(pm_m, beside = TRUE, border = TRUE, 
+        col = c("cadetblue", "tomato"),
+        names.arg = who_sp$year,
+        main = "Concentrações de PM em São Paulo")
+legend("topright", legend = c("PM10", "PM2.5"), 
+       pch = 15, col = c("cadetblue", "tomato"))
 ```
