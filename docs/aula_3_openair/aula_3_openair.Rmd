@@ -229,7 +229,6 @@ Comando simples: `summaryPlot(dado)`
 ```{r, out.width="60%"}
 library(openair)
 dado <- readRDS("../../data/pin_openair_ex.rds")
-dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 summaryPlot(dado)
 ```
 
