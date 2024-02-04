@@ -195,7 +195,7 @@ sec_float
 ```
 
 ## Vetores
-- Para \alert{selecionar} elementos do vetor: **`nombre_vetor[posição]`**:
+- Para \alert{selecionar} elementos do vetor: **`nome_vetor[posição]`**:
 ```{r, echo=T}
 # Primeiro elemento
 pontos_cardeais_graus[1]
@@ -222,7 +222,7 @@ GEE[-3] # Oxigênio não é GEE
 
 - Podemos Substituir um elemento do vetor assim:
 ```{r, echo=T}
-# Substituimos Oxigênio por Ozônio
+# Substituímos Oxigênio por Ozônio
 GEE[3] <- "O3"
 GEE
 ```
