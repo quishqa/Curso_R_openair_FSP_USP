@@ -336,7 +336,7 @@ mean(nox_ibi$nox, na.rm = TRUE)
 ## Plots
 
 - A principal função é **`plot()`**. Podemos usar `plot()` para criar \alert{séries de tempo} e \alert{gráfico de dispersão}.
-- Outras função são:
+- Outras funções são:
     - `hist()`: Cria histogramas.
     - `barplot()`: Diagrama de barras.
     - `boxplot()`: Diagrama de caixas.
@@ -353,11 +353,11 @@ plot(who_sp$year, who_sp$pm10)
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "cadetblue", # color da linha
+     col = "cadetblue", # cor da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]", # nome eixo y 
-     main = "São Paulo" # titulo do plot
+     main = "São Paulo" # título do plot
      )
 ```
 ## Séries temporais
@@ -365,7 +365,7 @@ plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "cadetblue", # color da linha
+     col = "cadetblue", # cor da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]",# 
@@ -379,7 +379,7 @@ plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "cadetblue", # color da linha
+     col = "cadetblue", # cor da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]",# 
@@ -387,7 +387,7 @@ plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      )
 points(who_sp$year, who_sp$pm10,
        pch = 19, # tipo do ponto
-       col = "cadetblue") # color do ponto
+       col = "cadetblue") # cor do ponto
 ```
 
 ## Séries temporais
@@ -396,7 +396,7 @@ points(who_sp$year, who_sp$pm10,
 plot(who_sp$year, who_sp$pm10,  # Dado eixo x, dado eixo y
      t = "l", # tipo linha
      lwd = 2.5, # largura da linha
-     col = "cadetblue", # color da linha
+     col = "cadetblue", # cor da linha
      ylim = c(25, 40), # limite do eixo x
      xlab = "Anos",  # nome eixo x
      ylab = "PM10 [ug/m3]",# 
