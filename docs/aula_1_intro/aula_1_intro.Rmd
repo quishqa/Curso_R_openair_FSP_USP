@@ -184,7 +184,7 @@ class(pontos_cardeais_graus) # só numeric
 ```
 
 ## Vetores
-- Uma \alert{sequência} é definida **`seq(inicio, final, intervalo)`**
+- Uma \alert{sequência} é definida **`seq(início, final, intervalo)`**
 ```{r, echo=T}
 de_1ate5 <- seq(1, 5)
 de_1ate5
