@@ -102,7 +102,7 @@ head(unique(who_br$`City or Locality`))
 
 -   Olha como o nome da coluna que tem espaços é escrita usando \` \`.
 
-## Subset dados da WHO para Sao Paulo
+## Subset dados da WHO para São Paulo
 
 ```{r}
 who_sp <-  subset(who,
@@ -113,7 +113,7 @@ who_sp <-  subset(who,
                              "NO2 (μg/m3)" ))
 ```
 
-## Subset dados da WHO para Sao Paulo
+## Subset dados da WHO para São Paulo
 
 -   Vamos arrumar um pouco o data frame
 
@@ -132,9 +132,9 @@ abline(h = 40, lwd = 1.5, col = "red")
 legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
 ```
 
-## Exercicio
+## Exercício
 
--   Quais cidades ultrapassarm o Padrão de qualidade do ar de NO2 no ano 2019?
+-   Quais cidades ultrapassaram o Padrão de qualidade do ar de NO2 no ano 2019?
 
 # qualR
 
@@ -145,7 +145,7 @@ legend("topright", col = "red", lwd = 1.5, legend = "NO2 WHO AQS")
     -   Horários faltantes preenchidos com `NA`.
     -   Coluna `date` tipo `POSIXct` para usar diretamente com `openair`.
 -   Precisa ter cadastro na plataforma [QUALAR da CETESB](https://qualar.cetesb.sp.gov.br/qualar/home.do).
--   Referencia [qualR](https://github.com/ropensci/qualR)
+-   Referência [qualR](https://github.com/ropensci/qualR)
 
 ## Instalação qualR
 
@@ -282,7 +282,7 @@ pin_pm25 <- cetesb_retrieve_param(
 - O arquivo salvo tem o nome  `Pinheiros_MP2.5_VV_DV_01-01-2024_07-01-2024.csv` e ficará na pasta de trabalho (conferir usando `getwd()`).
 
 ## Um mesmo poluente de várias estações
-- As vezes você precisa de comparar valores de várias estações. Neste exemplo vamos baixar valores de NO$_X$ da estação Ibirapuera e Pinheiros.
+- As vezes você precisa comparar valores de várias estações. Neste exemplo vamos baixar valores de NO$_X$ da estação Ibirapuera e Pinheiros.
 ```{r}
 aqs <- c(99, 83) # de cetesb_aqs, Pinheiros é 99 e Ibirapuera 83
 nox_pin_ibi <- lapply(
@@ -297,7 +297,7 @@ nox_pin_ibi <- lapply(
 ```
 
 ## Um mesmo poluente de várias estações
-- O resultado de usar `lapply` é uma lista. Vamos a transformar em um `data.frame`.
+- O resultado de usar `lapply` é uma lista. Vamos transformar em um `data.frame`.
 ```{r}
 nox_all <- do.call(rbind, nox_pin_ibi)
 ```
