@@ -67,7 +67,7 @@ include_graphics("figures/Rlogo.png")
     - `openair` $\rightarrow$ poluição do ar.
     - `sf` e `raster` $\rightarrow$ GIS.
     - `Rmarkdown` $\rightarrow$ Documentos e apresentações.
-    - `shiny` $\rightarrow$ applicações.
+    - `shiny` $\rightarrow$ aplicações.
     - etc, etc, etc
 ::::
 
