@@ -340,7 +340,7 @@ names(ar)
 
 ## Algumas funções importantes
 - Primeiras observações: **`head()`**
-- ùltimas observações: **`tail()`**
+- Últimas observações: **`tail()`**
 ```{r, echo=T}
 head(ar)
 tail(ar)
