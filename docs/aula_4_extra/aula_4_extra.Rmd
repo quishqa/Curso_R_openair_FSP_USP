@@ -13,7 +13,72 @@ toc: true
 knitr::opts_chunk$set(cache=TRUE)
 ```
 
+##
+
+- Nesta aula vamos falar sobre situações que acontecem quando trabalhamos com dados de qualidade do ar.
+- Também falaremos sobre boas praticas de R.
+- E resolver as suas dúvidas.
+
+# Média móvel
+
+## Média móvel
+
+- O padrão qualidade do ar em [São Paulo](https://cetesb.sp.gov.br/ar/padroes-de-qualidade-do-ar/) de O$_3$ é a \alert{média móvel de 8 horas}.
+- Outro padrão da [**WHO**](https://www.who.int/news-room/feature-stories/detail/what-are-the-who-air-quality-guidelines) é a \alert{MDA8} (_average of daily maximun 8-hour_) e também \alert{Peak season}.
+- `openair` conta com a função `rollingMean()` para fazer esses padrões.
+
+## Média móvel
+
+- Vamos calcular o padrão de qualidade do ar de O$_3$% para CETESB no 2021.
+```{r, eval=FALSE}
+library(openair)
+# Lendo o arquivo
+pin <- readRDS('../../data/pin_openair_ex.rds')
+pin_2021 <- selectByDate(pin, year = 2021)
+# Média móvel
+pin_2021 <- rollingMean(
+  pin_2021,
+  pollutant = 'o3',
+  width = 8,
+  new.name = "o3_8h",
+  data.thresh = 0.75)
+```
+
+## Média móvel
+- Foi criada a coluna **`o3_8h`**.
+```{r, echo=FALSE}
+library(openair)
+# Lendo o arquivo
+pin <- readRDS('../../data/pin_openair_ex.rds')
+pin_2021 <- selectByDate(pin, year = 2021)
+# Média móvel
+pin_2021 <- rollingMean(
+  pin_2021,
+  pollutant = 'o3',
+  width = 8,
+  new.name = "o3_8h"
+)
+head(pin_2021)
+```
+
+## Exercicio
+
+A MDA8 é a média móvel **máxima diária**. Como seria calculada?
+
+## MDA8
+```{r}
+library(openair)
+pin_mda8 <- timeAverage(pin_2021[, c("date", "o3_8h")], 
+                        avg.time = "day", # Diária
+                        statistic = "max") # Máxima
+head(pin_mda8)
+```
+
+
 # Juntar dados
+
+## Juntar dados
+
 
 ## Juntar filas
 

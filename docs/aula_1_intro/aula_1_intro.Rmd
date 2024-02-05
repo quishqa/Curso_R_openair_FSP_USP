@@ -1,5 +1,6 @@
 ---
 title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
+subtitle: R básico e data frames
 author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
 date: 05/02/2024
 institute: Universidade de São Paulo
@@ -91,7 +92,8 @@ include_graphics("figures/rstudio-panes-labeled.jpeg")
    - `Ctrl + 1` : Janela scripts.
    - `Ctrl + 2` : Janela console.
    - `Alt + - ` : `<-`
-   - `TAB`: Autocompleta nome de funções e direções de arquivos.
+   - `TAB`: Autocompleta nome de funções e diretórios de arquivos.
+- Na console, $\uparrow$ e $\downarrow$ procura comandos anteriores.
 
 # Sintaxe Básica
 
@@ -195,6 +197,14 @@ sec_float
 ```
 
 ## Vetores
+- Para saber quantos elementos tem um vetor usamos a função `length`.
+```{r}
+length(de_1ate5)
+length(sec_float)
+```
+
+
+## Vetores
 - Para \alert{selecionar} elementos do vetor: **`nome_vetor[posição]`**:
 ```{r, echo=T}
 # Primeiro elemento
@@ -227,6 +237,21 @@ GEE[3] <- "O3"
 GEE
 ```
 
+## Exercicio 1
+
+Criar três vetores. Um vetor chamado `pol_sp` com os poluentes que tem padrão de qualidade do ar no Estado de São Paulo.  Outro vetor chamado `pol_amostra` com **o menor tempo de amostragem** em horas. Finalmente, um vetor chamado `pol_pqa` com o respectivo padrão de qualidade do ar. 
+
+Referência: [Padrões de qualidade do ar CETESB](https://cetesb.sp.gov.br/ar/padroes-de-qualidade-do-ar/)
+
+## Exercicio 1
+
+```{r}
+pol_sp <- c("MP10", "MP2.5", "SO2", "NO2", "O3", "CO", "FMC", "PTS", "PB")
+pol_amostra <- c(24, 24, 24, 1, 8, 8, 24, 24, 365*24)
+pol_pqa <- c(100, 50, 40, 240, 130, 9, 100, 240, 0.5)
+```
+
+
 ## Operações *Element-wise* 
 ```{r, echo=T}
 tempC <- c(27, 32, 28, 26)
@@ -235,6 +260,12 @@ tempK
 tempk_chr <- as.character(tempK)
 str(tempk_chr)
 
+```
+
+## Operações *Element-wise*
+```{r}
+pol_atr <- c("nome", "pm", "conc", "unit")
+paste("o3", pol_atr, sep = "_")
 ```
 
 
@@ -366,13 +397,29 @@ ar
 
 ```
 
+## Exercicio 2
+
+- Criar um `data.frame` llamado `pqa_sp` usando os vetores do Exercicio 1.
+- Adiciona una coluna chamada `pm` con o peso molecular de cada poluente. Para MP colocar 1.
+- Adiciona una coluna chamada `nome` com o nome completo de cada poluente.
+
+## Exercicio 2
+```{r}
+pqa_sp <- data.frame(
+  pol_sp,
+  pol_amostra,
+  pol_pqa
+)
+pqa_sp$pm <- c(1, 1, 32 + 16 * 2, 14 + 16 * 2, 16 * 3, 12 + 16, 1, 1, 207.2)
+```
+
 
 ## `data frames`: Ler arquivos `.csv`
 
 - Vamos ler dados do ano 2023 do aeroporto de Guarulhos.
 - Os dados são baixados do site [**ASOS Network da Iowa State University**](https://mesonet.agron.iastate.edu/request/download.phtml?network=BR__ASOS).
 - No R para ler tabelas em csv (e para outros formatos) usamos a função \alert{`read.table()`}.
-- Esta função precisa saber a **localização do arquivo**. Para isso usamos a função **`file.choose()`**.
+- Esta função precisa saber o **diretório do arquivo**. Para isso podemos usar a função **`file.choose()`**.
 
 ## `data frames` Ler arquivos `.csv`
 
@@ -384,12 +431,13 @@ gru <- read.table("../../data/SBGR.csv", # ou file.choose()
 ```
 
 ## `data frames` Ler arquivos `.csv`
-- Exploramos o conteúdo do data frame:
+- Exploramos o nome das colunas do data frame:
 ```{r}
 names(gru)
 ```
 
 ## `data frames` Ler arquivos `.csv`
+- Exploramos a estrutura do `data frame`.
 ```{r}
 str(gru)
 ```
@@ -425,6 +473,13 @@ max(gru$tc, na.rm = TRUE)
 min(gru$tc, na.rm = TRUE)
 sd(gru$tc, na.rm = TRUE)
 ```
+
+## Exercio 3
+
+- Baixe os dados do aeroporto de campo de marte para o ano 2023.
+- Transforme a Temperatura para Celcius, e a velocidade do vento para m s$^{-1}$.
+- Existen datos faltantes?
+- Todos as colunas foram lidas corretamente?
 
 ## Um plot simples
 ```{r, eval=FALSE}
@@ -484,4 +539,7 @@ cor(gru$tc, # variavel x
     gru$relh) # variavel y
 ```
 
+## Exercicio 4
 
+- Calcule a média, mediana, min, max e sd, da Temperatura, Umidade relativa, Velocidade do vento no Aeroporto Campo de Marte.
+- Faça uma série temporal, um histograma e um boxplot destes parâmetros. 

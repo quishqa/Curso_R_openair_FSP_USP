@@ -1,5 +1,6 @@
 ---
 title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
+subtitle: Data frames, qualR, e plots
 author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
 date: 06/02/2024
 institute: Universidade de São Paulo

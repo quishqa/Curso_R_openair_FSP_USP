@@ -1,7 +1,8 @@
 ---
 title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
+subtitle: openair
 author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
-date: 06/02/2024
+date: 07/02/2024
 institute: Universidade de São Paulo
 output: binb::metropolis
 fontsize: 12pt
