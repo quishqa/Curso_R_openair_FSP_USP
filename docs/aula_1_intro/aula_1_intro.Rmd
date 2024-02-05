@@ -17,10 +17,45 @@ knitr::opts_chunk$set(cache=TRUE)
 # Introdução
 
 ## Por que o curso?
+### Efeitos adversos à saúde
+```{r, echo=FALSE, fig.align='center'}
+include_graphics("figures/silent_killer.jpg")
+```
 
+## Por que o curso?
+### **Carga global de doenças** da poluição do ar em 2015:
+- \alert{19 \%} de todas as mortes cardiovasculares.
+- \alert{23 \%} de toas as mortes por câncer de pulmão.
+
+```{r, echo=FALSE, fig.align='center', out.width="55%"}
+include_graphics("figures/air_pol_deaths.png")
+```
+
+## Por que o curso?
+### Ranking global de **fatores de risco** por número total de mortes em 2019
+```{r, echo=FALSE, fig.align='center'}
+include_graphics("figures/air_pol_risks.png")
+```
+
+## Por que o curso?
+### Então
+- Precisamos conhecer o \alert{nível da poluição}.
+- Para isso precisamos de medições: \alert{dados}.
+- Este curso tem como objetivo mostrar como \alert{trabalhar com dados de poluição do ar no R}.
+
+## Por que o curso?
+
+### Além disso
 * Analizadores de poluentes medem concentrações com maior frequência.
 * R é uma ótima ferramenta para mexer com dados.
 * É importante conhecer uma linguagem de programação.
+
+## Um questionário
+
+```{r, echo=FALSE, fig.align='center'}
+include_graphics("figures/qr_code_R.png")
+```
+
 
 ## Por que R?
 ::: columns
