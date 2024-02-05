@@ -19,6 +19,7 @@ knitr::opts_chunk$set(cache=TRUE)
 ## Manual do `openair`
 
 [Manual do openair](https://bookdown.org/david_carslaw/openair/)
+https://bookdown.org/david_carslaw/openair/
 
 # 1. Introdução 
 
