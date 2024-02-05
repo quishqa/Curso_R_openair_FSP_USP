@@ -38,11 +38,21 @@ include_graphics("figures/air_pol_risks.png")
 ```
 
 ## Por que o curso?
-### Então
+
+::: columns
+:::: column
+\
+_\"Data! Data! Data!\" He cried impatiently. \"I can't make bricks without clay.\"_\
+\
+\scriptsize Arthur Conan Doyle, The Adventure of the Copper Beeches- a Sherlock Holmes Short Story.
+::::
+
+:::: column
 - Precisamos conhecer o \alert{nível da poluição}.
 - Para isso precisamos de medições: \alert{dados}.
 - Este curso tem como objetivo mostrar como \alert{trabalhar com dados de poluição do ar no R}.
-
+::::
+:::
 ## Por que o curso?
 
 ### Além disso
@@ -127,8 +137,15 @@ include_graphics("figures/rstudio-panes-labeled.jpeg")
    - `Ctrl + 1` : Janela scripts.
    - `Ctrl + 2` : Janela console.
    - `Alt + - ` : `<-`
+   - `Ctrl + d` : Apaga linha.
    - `TAB`: Autocompleta nome de funções e diretórios de arquivos.
 - Na console, $\uparrow$ e $\downarrow$ procura comandos anteriores.
+
+## RStudio
+- No scripts
+   - `Alt + shift + ` $\downarrow$: Copia linha.
+   - `Ctrl + Enter`: Executa a linha.
+   - `Ctrl + a`: Seleciona todo o script.
 
 # Sintaxe Básica
 
@@ -146,6 +163,24 @@ knitr::include_graphics('figures/TTM.jpg')
 ```
 ::::
 :::
+
+## Antes de começar
+::: columns
+:::: column
+\textsc{Lei de Murphy}\
+
+_Se algo pode dar errado, dará._
+
+::::
+
+:::: column
+- R é _case-sensitive_:\ `uma_variavel` $\neq$ `Uma_variavel`.
+- Lembrem de fechar os `( )` 
+- Lembrem das `,`
+- \alert{Atentos} ao seguir os exemplos.
+::::
+:::
+
 
 ## R como calculadora
 
