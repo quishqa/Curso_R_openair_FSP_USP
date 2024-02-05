@@ -44,7 +44,7 @@ https://bookdown.org/david_carslaw/openair/
 
 ## 1.3 RStudio
 ### Relembrando:
-- Menu de ajuda: `?sum`, `help(sum)`
+- Menu de ajuda: `?sum`, `help(sum)`, `?openair::summaryPlot`
   
 - R é sensível a maiúscula e minúsculas, ou seja, \alert{“a”≠“A”}.
   
