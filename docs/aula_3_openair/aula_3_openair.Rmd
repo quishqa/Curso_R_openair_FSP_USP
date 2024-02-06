@@ -129,10 +129,18 @@ dado <- cetesb_retrieve_param(my_user_name,
 ## 1° Exercício
   
 1) Baixar a partir do pacote qualR as variáveis O3, PM2.5, VV e DV para a estação Pinheiros, para os anos de 2020 e 2021.
-
-## 3.4 Reemplazando dados
 ```{r, eval=FALSE}
 dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
+```
+
+## script do exercício 1
+```{r, eval=FALSE}
+dado <- cetesb_retrieve_param(my_user_name,
+                              my_password,
+                              c("O3", "MP2.5","VV", "DV"),
+                              "Pinheiros",
+                              start_date = "01/01/2020",
+                              end_date = "31/12/2021")
 ```
 
 # 4. Organizando os dados
