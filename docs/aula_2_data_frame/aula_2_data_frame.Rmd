@@ -14,6 +14,25 @@ toc: true
 knitr::opts_chunk$set(cache=TRUE)
 ```
 
+# Dúvidas aula passada
+
+## Dúvidas aula passada
+
+- Como instalar pacotes que podem não ser compativéis com a versão do R?
+- Como leer arquivos `.dbc`?
+
+## Dúvidas aula passada
+
+- Você pode instalar desde o código fonte.
+```{r, eval=FALSE}
+install.packages(
+  "~/Downloads/read.dbc_1.0.6.tar.gz",
+  repos = NULL,
+  type = "source"
+)
+```
+- O pacote [`read.dbc`](https://github.com/danicat/read.dbc) lê os arquivos `dbc`.
+
 # Pacotes
 
 ## Pacotes
