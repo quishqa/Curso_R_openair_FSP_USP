@@ -172,7 +172,8 @@ avg.time =  "sec", "min", "hour", "day", "2 week", "week", "month", "year", "15 
 
 ## 4.2 Selecionando um período
 ```{r, eval=FALSE}
-periodo <- selectByDate(dado, year = 2020, month = 6:8, hour = c(8:18))
+periodo <- selectByDate(dado, 
+          year = 2020, month = 6:8, hour = c(8:18))
 # também pode ser inserido no meio das funções
 ```
 
