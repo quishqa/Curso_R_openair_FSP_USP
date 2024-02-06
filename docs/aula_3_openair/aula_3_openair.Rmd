@@ -128,7 +128,7 @@ dado <- cetesb_retrieve_param(my_user_name,
 
 ## 1° Exercício
   
-1) Baixar a partir do pacote qualR as variáveis O3, PM2.5, VV e DV para a estação Pinheiros, para os anos de 2020 e 2021.
+1) Baixar a partir do pacote qualR as variáveis O3, PM2.5, NO2, VV e DV para a estação Pinheiros, para os anos de 2020 e 2021.
 ```{r, eval=FALSE}
 dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 ```
@@ -207,7 +207,7 @@ dev.off()
   
 2) Transformar a média horária em média diária. Exportar, em csv, dois arquivos (1 com dados diários e 1 horários).
 
-
+## script do exercício 2
 ```{r, eval=FALSE}
 write.csv(dado, 
           "C:/Users/Rafaela/Dropbox/POSDOC/curso rstudio/horario.csv", 
