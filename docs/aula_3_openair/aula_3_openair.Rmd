@@ -369,9 +369,9 @@ calendarPlot(selectByDate(dado,
              annotate = "value", #o que estará no interior do quadrado: "value", "date", "wd", "ws"
              statistic= "mean", #seleciona a análise estatística
              limits = c(0,35), #altera o limite da escala
-             lim = 25, #destaca o poluente que ultrapassar o limite
-             cols = c("Purples"), # muda a escala de cores: "increment","heat", "jet"
-             col.lim = c("black", "orange"), #
+             lim = 25, #destaca o dia que ultrapassar o limite
+             cols = c("Purples"), #muda escala de cores: "increment","heat", "jet"
+             col.lim = c("black", "orange"), 
              layout = c(3, 1), #como estará disposta a figura
              main = "Estação Pinheiros", #título 
              key.footer = "PM2.5") #texto na legenda: key.header = "PM2.5" em cima
