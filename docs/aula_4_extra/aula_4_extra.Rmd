@@ -30,7 +30,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 ## Média móvel
 
-- Vamos calcular o padrão de qualidade do ar de O$_3$% para CETESB no 2021.
+- Vamos calcular o padrão de qualidade do ar de O$_3$ para CETESB no 2021.
 ```{r, eval=FALSE}
 library(openair)
 # Lendo o arquivo
@@ -89,11 +89,6 @@ print(
 )
 ```
 
-
-# Juntar dados
-
-## Juntar data.frames multiplos archivos
-
 # Combinar data frames
 
 ## Combinar data frames
@@ -138,17 +133,112 @@ class(o3)
 o3
 ```
 
+## Transformar zona horária
+- Fontes de dados globais podem ter a zona horária em UTC. Você precisa trazer para horário local.
+```{r}
+# Criamos uma base de dados 
+date <- seq(as.POSIXct("2024-01-01 00:00", tz = "UTC"),
+            length.out = 30 * 24, by = "hour")
+o3 <- runif(length(date), 100, 160)
+df <- data.frame(date, o3)
+head(df$date)
+```
+
+## Transformar zona horária
+```{r}
+attributes(df$date)$tzone <- "America/Sao_Paulo"
+head(df$date)
+```
 
 # Mapas de estações
+
+##  Mapas das estações
+Vamos plotar a média mensal das estações de qualidade do ar num mapa.
+
+## Calculando as médias
+```{r}
+# Lendo o arquivo
+aqs_o3_pm25 <- read.table("../../data/o3_pm25_pin_ibi_usp_pico.csv", header = T,
+                          sep = ",")
+aqs_o3_pm25$date <- as.POSIXct(aqs_o3_pm25$date)
+```
+
+## Calculando as médias
+```{r}
+aqs_o3_pm25_mean <- aggregate(aqs_o3_pm25[c("o3", "pm25")],
+                              aqs_o3_pm25["aqs"],
+                              mean,
+                              na.rm = TRUE)
+aqs_o3_pm25_mean
+```
+
+## Calculando as médias
+- Adicionando as latitude e longitudes
+```{r}
+library(qualR)
+# Colocando latitude e longitude no noso dataframe
+aqs <- c(99, 83, 95, 284)
+lats_lons <- cetesb_aqs[cetesb_aqs$code %in% aqs, ]
+aqs_o3_pm25_mean$lon <- lats_lons$lon
+aqs_o3_pm25_mean$lat <- lats_lons$lat
+```
+
+## Ler mapa da Região Metropolitana de São Paulo
+```{r}
+library(rgdal) # Para ler shapefiles
+library(broom) # Para transformar shapefile to data frame
+library(ggplot2) # Para fazer o mapa
+
+rmsp <- readOGR("../../data/rmsp_shp/rmsp_ll.shp")
+rmsp_df <- tidy(rmsp, data = "name_mn") # Transforma o shp em dataframe
+```
+
+
+## Fazendo o mapa
+
+```{r, eval=FALSE}
+# Making the plot
+ggplot() +
+  geom_path(data =rmsp_df, aes(x = long, y = lat, group = group)) +
+  geom_point(data = aqs_o3_pm25_mean, aes(x = lon, y = lat, color = o3), size = 4) +
+  scale_color_viridis_c(option = "viridis", direction = -1,
+                        name=expression("(" * mu * "g m" ^-3 * ")")) +  # direction = -1 to get darker color with higher concentration
+  theme_bw() + # Remove grid and remove that grey background
+  coord_quickmap() +  #  Scale X and Y based on lon and lat
+  labs(title = "Concentração de Ozônio em Janeiro 2024",
+       subtitle = "Região Metropolitana de São Paulo",
+       x = "", y = "")
+```
+
+## Fazendo o mapa
+```{r, echo=FALSE}
+ggplot() +
+  geom_path(data =rmsp_df, aes(x = long, y = lat, group = group)) +
+  geom_point(data = aqs_o3_pm25_mean, aes(x = lon, y = lat, color = o3), size = 4) +
+  scale_color_viridis_c(option = "viridis", direction = -1,
+                        name=expression("(" * mu * "g m" ^-3 * ")")) +  # direction = -1 to get darker color with higher concentration
+  theme_bw() + # Remove grid and remove that grey background
+  coord_quickmap() +  #  Scale X and Y based on lon and lat
+  labs(title = "Concentração de Ozônio em Janeiro 2024",
+       subtitle = "Região Metropolitana de São Paulo",
+       x = "", y = "")
+```
+
 
 # Boas praticas do R
 - Para cada trabalho usar RStudio Projects:
     - Mais fácil de compartilhar. Não precisa definir o caminho dos inputs.
 - É bom olhar guias de estilo do R.
+    - [Google R guide](https://web.stanford.edu/class/cs109l/unrestricted/resources/google-style.html):
+        - Usar `<-` para definir variavéis.
+        - Usar `=` para os argumntos.
+        - Usar espaços para separar argumentos e `=`.
+        - Usar nome significativos das variavéis.
 
-
-# Introdução RMarkdown
-
-# Pratica
 
 # Mais recursos.
+
+## Base de dados
+- Dados dos aeroportos: [`riem` package](https://docs.ropensci.org/riem/)
+- Dados do brazil geobr [`geobr` package](https://github.com/ipeaGIT/geobr)
+- Dados de qualidade do ar: [openaq](https://openaq.org/#/countries?_k=vx9kky)
