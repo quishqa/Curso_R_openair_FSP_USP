@@ -607,7 +607,7 @@ polarPlot(dado,
           key.footer = "O3", #adiciona texto na escala
           key.position = "bottom", #posição da escala
           type = "weekday", #“season”, “year”
-          estatística = "mean")
+          statistic = "mean")
 #obs: statistic = “mean”(default), “median”, “max”(maximum), “frequency”, “stdev” (standard deviation)
 ```
 
@@ -711,7 +711,61 @@ corPlot(dado,
 #obs2: type = “season”, “year”, “weekday” etc.
 ``` 
 
-## Atividade final 1:
+## Atividade final:
   
-Selecionar o período de 01 a 22 de março de 2020 (pré-lockdwon) e de 23 de março a 13 de abril de 2020 (Lockdown). Plotar a série temporal e verificar se ocorreu diferença de concentração entre os períodos.Avaliar também se houve diferença entre as concentrações de O3 e PM2.5 quanto ao perfil diurno e dia da semana. 
-  
+Selecionar os meses de março e abril de 2020, criando um novo data frame (periodo).
+Plotar um timePlot com as concentrações de O3 e NO2 separando com uma linha vertical o período de 01 a 22 de março de 2020 (pré-lockdwon) e de 23 de março em diante (Lockdown).
+Usando o splitByDate e o timeVariation, avaliar se houve diferença entre as concentrações de O3 e NO2 quanto ao perfil diurno (hour) e dia da semana (day.hour). Exportar as figuras ao final.
+
+```{r, echo=FALSE}
+periodo <- selectByDate(dado, year = c(2020), month = c(3:4))
+
+setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
+png("timePlot.png", width = 9 * 300, height = 5 * 300, res = 300)
+timePlot(periodo,
+         pollutant = c("o3", "no2"), 
+         date.format = "%d-%b",
+         avg.time = "hour",
+         lwd = 1, #espessura da linha
+         y.relation = "free",
+         ylab = " ",
+         cols= c("blue", "red"),
+         ref.x = list(v = as.POSIXct("2020-03-22"), lty = 5))
+dev.off()
+
+tv <- splitByDate(periodo, dates = "22/03/2020", 
+                  labels = c("pré-lockdown", "lockdown"))
+
+no2 <-timeVariation(tv, pollutant = c("no2"), 
+                   group = "split.by", 
+                   ylab = "NO2 (ppb)", 
+                   xlab = c("Hour", "Hour", "Month", "Weekday"),
+                   ylim = c(0,60))
+
+setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
+png("tV_diurno_no2.png", width = 9 * 300, height = 4 * 300, res = 300)
+hour <- plot(no2, subset = c("hour"))
+dev.off()
+
+setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
+png("tV_semana_no2.png", width = 9 * 300, height = 4 * 300, res = 300)
+day_hour<- plot(no2, subset = c("day.hour"))
+dev.off()
+
+
+o3 <-timeVariation(tv, pollutant = c("o3"),
+                    group = "split.by", 
+                    ylab = "O3(ppb)", 
+                    xlab = c("Hour", "Hour", "Month", "Weekday"),
+                    ylim = c(0,120))
+setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
+png("tV_diurno_o3.png", width = 9 * 300, height = 5 * 300, res = 300)
+plot(o3, subset= c("hour"))
+dev.off()
+
+setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
+png("tV_semana_o3.png", width = 9 * 300, height = 4 * 300, res = 300)
+plot(o3, subset= c("day.hour"))
+dev.off()
+
+``` 
