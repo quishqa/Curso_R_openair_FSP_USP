@@ -1,5 +1,5 @@
 # Material do curso Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
-Material do curso Introdução à Linguagem de Programação em R para tratamento de dados da poluição do ar: o pacote openair
+Material do curso _Introdução à Linguagem de Programação em R para tratamento de dados da poluição do ar: o pacote openair_
 
 ## Instruções
 
@@ -14,6 +14,6 @@ install.packages("binb") # Tema dos slides
 
 ## Professores
 
-- Mario Gavidia-Calderón (:email: mario.calderon@iag.usp.br)
-- Rafaela Squizzato (:email: rafaela.squizzato@iag.usp.br)
-- Thiago Nogueira (:email: thiagonogueira@usp.br)
+- Mario Gavidia-Calderón (:e-mail: mario.calderon@iag.usp.br)
+- Rafaela Squizzato (:e-mail: rafaela.squizzato@iag.usp.br)
+- Thiago Nogueira (:e-mail: thiagonogueira@usp.br)
