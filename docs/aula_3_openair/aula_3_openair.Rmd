@@ -366,7 +366,7 @@ calendarPlot(dado, pollutant = "o3", year = 2019)
 ## 7.3 calendarPlot
 ```{r, eval=FALSE}
 calendarPlot(selectByDate(dado, 
-             year = 2019, month = c("jun","jul","ago")), #seleciona o ano/mês desejado
+             year = 2019, month = c("jun","jul","aug")), #seleciona o ano/mês desejado
              pollutant = "pm25", #seleciona o poluente
              annotate = "value", #o que estará no interior do quadrado: "value", "date", "wd", "ws"
              statistic= "mean", #seleciona a análise estatística
@@ -382,7 +382,7 @@ calendarPlot(selectByDate(dado,
 ## 7.3 calendarPlot
 ```{r, echo=FALSE}
 calendarPlot(selectByDate(dado, 
-             year = 2019, month = c("jun","jul","ago")), #seleciona o ano/mês desejado
+             year = 2019, month = c("jun","jul","aug")), #seleciona o ano/mês desejado
              pollutant = "pm25", #seleciona o poluente
              annotate = "value", #o que estará no interior do quadrado: "value", "date", "wd", "ws"
              statistic= "mean", #seleciona a análise estatística
@@ -728,7 +728,6 @@ Usando o splitByDate e o timeVariation, avaliar se houve diferença entre as con
 
 ```{r, eval=FALSE}
 periodo <- selectByDate(dado, year = c(2020), month = c(3:4))
-
 setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
 png("timePlot.png", width = 9 * 300, height = 5 * 300, res = 300)
 timePlot(periodo,
@@ -741,27 +740,34 @@ timePlot(periodo,
          cols= c("blue", "red"),
          ref.x = list(v = as.POSIXct("2020-03-22"), lty = 5))
 dev.off()
+```
 
+## Script da atividade final
+
+```{r, eval=FALSE}
 tv <- splitByDate(periodo, dates = "22/03/2020", 
                   labels = c("pré-lockdown", "lockdown"))
-
 no2 <-timeVariation(tv, pollutant = c("no2"), 
                    group = "split.by", 
                    ylab = "NO2 (ppb)", 
                    xlab = c("Hour", "Hour", "Month", "Weekday"),
                    ylim = c(0,60))
+```
 
+## Script da atividade final
+```{r, eval=FALSE}
 setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
 png("tV_diurno_no2.png", width = 9 * 300, height = 4 * 300, res = 300)
 hour <- plot(no2, subset = c("hour"))
 dev.off()
-
 setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
 png("tV_semana_no2.png", width = 9 * 300, height = 4 * 300, res = 300)
 day_hour<- plot(no2, subset = c("day.hour"))
 dev.off()
+```
 
-
+## Script da atividade final
+```{r, eval=FALSE}
 o3 <-timeVariation(tv, pollutant = c("o3"),
                     group = "split.by", 
                     ylab = "O3(ppb)", 
@@ -771,10 +777,8 @@ setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
 png("tV_diurno_o3.png", width = 9 * 300, height = 5 * 300, res = 300)
 plot(o3, subset= c("hour"))
 dev.off()
-
 setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
 png("tV_semana_o3.png", width = 9 * 300, height = 4 * 300, res = 300)
 plot(o3, subset= c("day.hour"))
 dev.off()
-
 ``` 

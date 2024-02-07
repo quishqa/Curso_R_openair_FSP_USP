@@ -1,5 +1,6 @@
 ---
 title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
+subtitle: openair e R do dia dia
 author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
 date: 06/02/2024
 institute: Universidade de São Paulo
@@ -55,23 +56,37 @@ pin_2021 <- selectByDate(pin, year = 2021)
 pin_2021 <- rollingMean(
   pin_2021,
   pollutant = 'o3',
-  width = 8,
-  new.name = "o3_8h"
+  width = 8, # 8 por que é cada 8 horas
+  new.name = "o3_8h" # nome nova coluna
 )
 head(pin_2021)
 ```
 
-## Exercicio
+## Exercício 1
 
 A MDA8 é a média móvel **máxima diária**. Como seria calculada?
 
-## MDA8
+## Script do exercício 1: MDA8
 ```{r}
 library(openair)
-pin_mda8 <- timeAverage(pin_2021[, c("date", "o3_8h")], 
+pin_mda8 <- timeAverage(pin_2021[c("date", "o3_8h")], 
                         avg.time = "day", # Diária
                         statistic = "max") # Máxima
 head(pin_mda8)
+```
+## Exercício 2
+
+Quantos dias foi superado o padrão de O$_3$ na estação Pinheiros?
+
+## Script exercício 2
+
+Podemos usar `subset`. O padrão é 130 $\mu g m^{-3}$.
+```{r}
+dias_o3 <- subset(pin_mda8, 
+                  subset = o3_8h >= 130)
+print(
+  paste("O padrão foi superado ", nrow(dias_o3), "dias")
+)
 ```
 
 
@@ -79,17 +94,58 @@ head(pin_mda8)
 
 ## Juntar data.frames multiplos archivos
 
-# Completar dados faltantes
+# Combinar data frames
 
 ## Combinar data frames
+- Muitas vezes precisamos combinar duas tabelas que tem uma coluna comun. Por exemplo se temos uma tabela com a média anual de O$_3$ das estações e outra tabela com a média anual de PM$_{2.5}$, para isso usamos `merge()`.
+
+## Combinar data frames
+```{r}
+o3 <- data.frame(aqs = c("pin", "ibu", "usp", "fsp"),
+                 o3 = runif(4, 0, 160))
+pm25 <- data.frame(aqs = c("pin", "ibu", "usp", "fsp"),
+                   pm25 = runif(4, 10, 60))
+dados <- merge(o3, pm25)
+dados
+```
+
+## Completar dados faltantes
+- Podemos usar o `merge` para completar com `NA` se um data frame não tem uma linha de dados.
+- Precisamos adicionar o argumento `all = TRUE`.
+- Serve para detectar quantos dados faltantes existem na nossa base de dados.
+
+## Completar dados faltantes
+```{r}
+o3 <- data.frame(aqs = c("pin", "ibu", "usp", "fsp"),
+                 o3 = runif(4, 0, 160))
+pm25 <- data.frame(aqs = c("pin", "ibu", "usp"),
+                   pm25 = runif(3, 10, 60))
+dados <- merge(o3, pm25, all = TRUE)
+dados
+```
 
 # Transformar tipos de objetos
 
 ## `character` para `numeric`
+- Às vezes quando usamos `read.table` ou `read_excel`, se uma coluna tem o dado faltante como um character especial (e.g "M"). Para poder operar precisamos forçar a transformação para `numeric`.
+
+## `character` para `numeric`
+```{r}
+o3 <- c(90, 89, 76, 83, "M")
+class(o3)
+o3 <- as.numeric(o3) # Atualizamos o valor do vetor o3
+class(o3)
+o3
+```
+
 
 # Mapas de estações
 
 # Boas praticas do R
+- Para cada trabalho usar RStudio Projects:
+    - Mais fácil de compartilhar. Não precisa definir o caminho dos inputs.
+- É bom olhar guias de estilo do R.
+
 
 # Introdução RMarkdown
 
