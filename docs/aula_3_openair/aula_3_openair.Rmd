@@ -292,7 +292,7 @@ timePlot(selectByDate(dado, year = "2019"), #selecionando o período
          name.pol = c ("O3 (ppb)","PM25 (ug/m3)"), #insere o nome desejado (y)
          date.format = "%b-%Y", #o formato da data
          avg.time = "month", #período de tempo da média
-         date.breaks = (10),
+         date.breaks = 10,
          windflow = list(scale = 0.05, lwd =2, col = "gray"), #insere dado de vento
          ref.y = list(h = 15, lty = 5, col = ("red"))) #insere linha horizontal no gráfico
 
