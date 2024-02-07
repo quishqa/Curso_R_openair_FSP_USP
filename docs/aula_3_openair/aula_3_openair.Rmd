@@ -180,7 +180,7 @@ periodo <- selectByDate(dado,
 ## 4.3 Trocando valores de calibração por NA's
 ```{r, eval=FALSE}
 dado$O3<- replace(dado$O3, dado$O3 <= 0, NA)
-dado$O3 <- replace(dado$O3, dado$hour == 6, NA)
+dado$O3 <- replace(dado$O3, dado$hour == "06", NA)
 ```
 
 # 5. Exportando os dados
