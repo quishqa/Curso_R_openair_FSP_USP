@@ -336,7 +336,7 @@ timePlot(selectByDate(dado, year = "2019"), #selecionando o período
 
 ## 3° Exercício
   
-3) Fazer um timeplot com as concentrações diárias de PM2.5 para os meses de junho, julho e agosto, mudando cor/espessura de linha e inserir uma linha referente ao limite do poluente (WHO).
+3) Fazer um timeplot com as concentrações diárias de PM2.5 para os meses de junho, julho e agosto (ano 2021), mudando cor/espessura de linha e inserir uma linha referente ao limite do poluente (WHO).
 ```{r, eval=FALSE}
 timePlot(selectByDate(dado, year = "2019", month = c("jun", "jul", "ago")),
          pollutant = c("pm25"), 
@@ -643,13 +643,13 @@ polarAnnulus(dado,
 5) Fazer um polarPlot e um polarAnnulus de todo o período analisado, usando o statistic = “mean”(default).  E plotar elas juntas, com as escalas do lado direito.
 ```{r, eval=FALSE}
 library(gridExtra) #plotar figuras juntas
-pp <- polarPlot(dado, pollutant = "o3", estatística = "mean",
+pp <- polarPlot(dado, pollutant = "o3", statistic = "mean",
           key.footer = "O3", #adiciona texto na escala
           key.position = "right") #posição da escala
 
 pa<- polarAnnulus(dado, pollutant = "o3", period = "hour", 
              exclude.missing = FALSE, key.position = "right", 
-             key.footer = "O3", estatística = "mean")
+             key.footer = "O3", statistic = "mean")
 grid.arrange(pp$plot, pa$plot, nrow=1, ncol=2)
 ```  
 
