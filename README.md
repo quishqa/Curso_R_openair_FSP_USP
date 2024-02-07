@@ -1,7 +1,7 @@
 # Material do curso Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
 Material do curso _Introdução à Linguagem de Programação em R para tratamento de dados da poluição do ar: o pacote openair_.
 
-O curso durou do 5 até 8 de Fevereiro de 2024.
+O curso foi ministrado de 05 a 08 de fevereiro de 2024.
 
 ## Instruções
 
