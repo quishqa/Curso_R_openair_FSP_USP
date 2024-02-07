@@ -406,7 +406,8 @@ timeVariation(dado, pollutant = c("o3"))
 
 ## 7.4 timeVariation
 ```{r, eval=FALSE}
-timeVariation(selectByDate(dado, year = 2019, month = c("jun", "julho", "ago")),
+timeVariation(selectByDate(dado, 
+              year = 2019, month = c("jun", "julho", "ago")),
               pollutant = c("o3"), 
               group = "season",
               ylab = " O3 (ug m-3)", 
