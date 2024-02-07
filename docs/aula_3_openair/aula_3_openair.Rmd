@@ -148,7 +148,7 @@ dado <- cetesb_retrieve_param(my_user_name,
 ## 4. Organizando os dados
 ```{r, eval=FALSE}
 dado$date <- as.POSIXct(
-  strptime(dado$date, format = "%Y-%m-%d %H:%M:%OS", tz = "UTC"))
+  strptime(dado$date, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"))
 dado$hour <- as.numeric((dado$hour)) #transformando a coluna em numérica
 names(dado) <- c("date","estacao","wd", "pm25","o3", "ws") #trocar o nome do cabeçalho
 dado["hour"]<- format(dado$date, "%H") #criando coluna só com hora
