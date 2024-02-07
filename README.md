@@ -14,6 +14,6 @@ install.packages("binb") # Tema dos slides
 
 ## Professores
 
-- Mario Gavidia-Calderón (:e-mail: mario.calderon@iag.usp.br)
-- Rafaela Squizzato (:e-mail: rafaela.squizzato@iag.usp.br)
-- Thiago Nogueira (:e-mail: thiagonogueira@usp.br)
+- Mario Gavidia-Calderón (mario.calderon@iag.usp.br)
+- Rafaela Squizzato (rafaela.squizzato@iag.usp.br)
+- Thiago Nogueira (thiagonogueira@usp.br)
