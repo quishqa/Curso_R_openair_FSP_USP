@@ -11,3 +11,9 @@ install.packages("tinytext") # Para exportar em pdf
 tinytext::install_tinytext() 
 install.packages("binb") # Tema dos slides
 ```
+
+## Professores
+
+- Mario Gavidia-Calderón (:email: mario.calderon@iag.usp.br)
+- Rafaela Squizzato (:email: rafaela.squizzato@iag.usp.br)
+- Thiago Nogueira (:email: thiagonogueira@usp.br)
