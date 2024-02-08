@@ -17,6 +17,9 @@ install.packages("binb") # Tema dos slides
 ## A turma
 ![](data/photo/photo_turma.jpg)
 
+## Nuvem de palavras
+![](data/word_cloud.png)
+
 ## Professores
 
 - Mario Gavidia-Calderón (mario.calderon@iag.usp.br)
