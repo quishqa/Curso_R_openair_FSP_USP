@@ -248,6 +248,7 @@ ggplot() +
 
 ## Sobre R
 
+- Funções do R: [**R reference card**](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 - Galeria de figuras no R: [**The R Graph Gallery**](https://r-graph-gallery.com/index.html)
 - RStudio folha de dicas: [**RStudio cheat sheet**](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
 
