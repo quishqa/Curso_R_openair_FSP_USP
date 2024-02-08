@@ -198,7 +198,7 @@ write.csv(dado, "C:/Users/Fulano/R files/dado_teste.csv",
 ```{r, eval=FALSE}
 setwd(" C:/Users/Fulano/R files ")
 png("O3.png", width = 9 * 300, height = 5 * 300, res = 300)
-timeVariation (dado)
+timeVariation (dado, pollutant = "o3")
 dev.off()
 ```
 
