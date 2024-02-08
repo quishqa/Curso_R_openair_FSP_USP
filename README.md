@@ -1,7 +1,7 @@
 # Material do curso Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
 Material do curso [_Introdução à Linguagem de Programação em R para tratamento de dados da poluição do ar: o pacote openair_](https://www.fsp.usp.br/site/eventos/mostra/48597).
 
-O curso foi ministrado de 05 a 08 de fevereiro de 2024.
+O curso foi ministrado de 05 a 08 de fevereiro de 2024 oferecido como curso de verão pelo [LEHCA](https://www.fsp.usp.br/lehca/author/lehca/).
 
 ## Instruções
 
