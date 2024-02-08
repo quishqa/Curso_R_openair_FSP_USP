@@ -241,4 +241,16 @@ ggplot() +
 ## Base de dados
 - Dados dos aeroportos: [`riem` package](https://docs.ropensci.org/riem/)
 - Dados do brazil geobr [`geobr` package](https://github.com/ipeaGIT/geobr)
-- Dados de qualidade do ar: [openaq](https://openaq.org/#/countries?_k=vx9kky)
+- Dados qualidade do ar São Paulo: [`qualR` package](https://github.com/ropensci/qualR)
+- Dados DATASUS: [`DATASUS` package](https://github.com/danicat/datasus)
+- Dados DATASUS: [`microdatasus` package](https://github.com/rfsaldanha/microdatasus?tab=readme-ov-file)
+- Dados de qualidade do ar: [*openaq*](https://openaq.org/#/countries?_k=vx9kky)
+
+## Sobre R
+
+- Galeria de figuras no R: [**The R Graph Gallery**](https://r-graph-gallery.com/index.html)
+- RStudio folha de dicas: [**RStudio cheat sheet**](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
+
+---
+
+Muito Obrigado!
