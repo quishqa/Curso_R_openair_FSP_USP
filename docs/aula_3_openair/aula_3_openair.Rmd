@@ -115,32 +115,35 @@ cetesb_param #parâmetro, unidade e código
 
 my_user_name <- "e-mail"
 my_password <- "senha"
-start_date <- "01/01/2020"
-end_date <- "31/12/2021"
+start_date <- "01/01/2023"
+end_date <- "31/12/2024"
 
 dado <- cetesb_retrieve_param(my_user_name,
                               my_password,
                               c("O3", "MP2.5","VV", "DV"),
                               "Pinheiros",
-                              start_date = "01/01/2020",
-                              end_date = "31/12/2021")
+                              start_date = "01/01/2023",
+                              end_date = "31/12/2024")
 ```
 
 ## 1° Exercício
   
-1) Baixar a partir do pacote qualR as variáveis O3, PM2.5, NO2, VV e DV para a estação Pinheiros, para os anos de 2020 e 2021.
+1) Baixar a partir do pacote qualR as variáveis O3, PM2.5, NO2, VV e DV para a estação Pinheiros, para os anos de 2023 e 2024.
 ```{r, eval=FALSE}
 dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 ```
 
 ## Script do exercício 1
 ```{r, eval=FALSE}
+my_user_name <- "e-mail"
+my_password <- "senha"
+
 dado <- cetesb_retrieve_param(my_user_name,
                               my_password,
                               c("O3", "MP2.5","VV", "DV"),
                               "Pinheiros",
-                              start_date = "01/01/2020",
-                              end_date = "31/12/2021")
+                              start_date = "01/01/2023",
+                              end_date = "31/12/2024")
 ```
 
 # 4. Organizando os dados
@@ -173,7 +176,7 @@ avg.time =  "sec", "min", "hour", "day", "2 week", "week", "month", "year", "15 
 ## 4.2 Selecionando um período
 ```{r, eval=FALSE}
 periodo <- selectByDate(dado, 
-          year = 2020, month = 6:8, hour = c(8:18))
+          year = 2024, month = 6:8, hour = c(8:18))
 # também pode ser inserido no meio das funções
 ```
 
@@ -239,8 +242,9 @@ Comando simples: `summaryPlot(dado)`
 ## 7.1 summaryPlot
 ```{r, out.width="60%"}
 library(openair)
-dado <- readRDS("../../data/pin_openair_ex.rds")
+dado <- readRDS(”../../data/pin_openair_ex.rds”)
 summaryPlot(dado)
+# dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 ```
 
 ## 7.1 summaryPlot
@@ -248,9 +252,7 @@ summaryPlot(dado)
 summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
              period = "months", #melhora a visualização do dado para os períodos disponíveis
              print.datacap = FALSE, #traz o percentual por período
-             date.breaks = 10, #número de intervalos principais do eixo x a serem usados
              avg.time = "day", #dados horários/diários
-             date.format = "%b-%Y", #formato do eixo x
              col.data = "lightblue", #cor da barra de dados disponíveis
              col.trend = "orange", #cor da linha
              col.hist = "black", #cor do histograma ou gráfico de densidade.
@@ -274,7 +276,7 @@ summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
 
 - Para representar rapidamente séries temporais de dados ao mesmo tempo (vários poluentes ou variáveis). Possibilita visualizar o comportamento dos dados (picos de concentração, falhas nos dados, etc), auxiliando-o na seleção dos dados. 
   
-- Comando simples: `timePlot(dado)`
+- Comando simples: `timePlot(dado, pollutant = c("X"))`
 
 \metroset{block=fill}
 \begin{alertblock}{OBS:} 
@@ -286,7 +288,7 @@ Pode ser usado o `selectByDate` nessa função
 timePlot(dado, 
          pollutant = c("o3","pm25"))
 
-timePlot(selectByDate(dado, year = "2019"), #selecionando o período
+timePlot(selectByDate(dado, year = "2024"), #selecionando o período
          pollutant = c("o3","pm25"), #selecionando o(s) poluente(s)
          y.relation = "free", #escala varia de acordo com o poluente
          name.pol = c ("O3 (ppb)","PM25 (ug/m3)"), #insere o nome desejado (y)
@@ -336,11 +338,11 @@ timePlot(selectByDate(dado, year = "2019"), #selecionando o período
 
 ## 3° Exercício
   
-3) Fazer um timeplot com as concentrações diárias de PM2.5 para os meses de junho, julho e agosto (ano 2021), mudando cor/espessura de linha e inserir uma linha referente ao limite do poluente (WHO).
+3) Fazer um timeplot com as concentrações diárias de PM2.5 para os meses de junho, julho e agosto (ano 2024), mudando cor/espessura de linha e inserir uma linha referente ao limite do poluente (WHO - 15 ug/m³).
 
 ## Script do exercício 3
 ```{r, eval=FALSE}
-timePlot(selectByDate(dado, year = "2019", month = c("jun", "jul", "ago")),
+timePlot(selectByDate(dado, year = "2024", month = c("jun", "jul", "ago")),
          pollutant = c("pm25"), 
          date.format = "%b-%Y",
          avg.time = "day",
@@ -356,22 +358,22 @@ timePlot(selectByDate(dado, year = "2019", month = c("jun", "jul", "ago")),
   
 - O calendário pode dispor: os dias ou as concentrações. Além disso, é possível plotar setas que indicarão a direção do vento e velocidade, para observar a influência da meteorologia nas concentrações dos poluentes.
   
-- Comando simples: `calendarPlot(dado)`
+- Comando simples: `calendarPlot(dado, pollutant = "X")`
 
 ## 7.3 calendarPlot
 ```{r}
-calendarPlot(dado, pollutant = "o3", year = 2019)
+calendarPlot(dado, pollutant = "o3", year = 2024)
 ```
 
 ## 7.3 calendarPlot
 ```{r, eval=FALSE}
 calendarPlot(selectByDate(dado, 
-             year = 2019, month = c("jun","jul","aug")), #seleciona o ano/mês desejado
+             year = 2024, month = c("jun","jul","aug")), #seleciona o ano/mês desejado
              pollutant = "pm25", #seleciona o poluente
              annotate = "value", #o que estará no interior do quadrado: "value", "date", "wd", "ws"
              statistic= "mean", #seleciona a análise estatística
              limits = c(0,35), #altera o limite da escala
-             lim = 25, #destaca o dia que ultrapassar o limite
+             lim = 15, #destaca o dia que ultrapassar o limite
              cols = c("Purples"), #muda escala de cores: "increment","heat", "jet"
              col.lim = c("black", "orange"), 
              layout = c(3, 1), #como estará disposta a figura
@@ -420,7 +422,7 @@ timeVariation(selectByDate(dado,
 
 ## 7.4 timeVariation
 ```{r, echo=FALSE}
-timeVariation(selectByDate(dado, year = 2019, month = c("jun", "julho", "ago")),
+timeVariation(selectByDate(dado, year = 2024, month = c("jun", "julho", "ago")),
               pollutant = c("o3"), 
               group = "season",
               ylab = " O3 (ug m-3)", 
@@ -466,13 +468,13 @@ plot(o3, subset = "hour")
 
 ## 4° Exercício
   
-4) Usando o splitByDate, separe os dados em antes (2020) e depois (2021). Use a função timeVariation para plotar o ciclo diurno do O3, separando-a do resto da figura (subset = “hour”).
+4) Usando o splitByDate, separe os dados em antes (2023) e depois (2024). Use a função timeVariation para plotar o ciclo diurno do O3, separando-a do resto da figura (subset = “hour”).
 
 
 ## Script do exercício 4
 ```{r, eval=FALSE}
-tv <- splitByDate(dado, dates = "31/12/2020", 
-                  labels = c("2020", "2021"))
+tv <- splitByDate(dado, dates = "31/12/2023", 
+                  labels = c("2023", "2024"))
 o3 <-timeVariation(tv, pollutant = c("o3"), 
                    group = "split.by", 
                    ylab = " O3 (ppb)", 
@@ -528,7 +530,7 @@ windRose(dado, type = "year",
 
 - É uma variante da função “windRose” que é útil para considerar concentrações de poluentes por direção do vento ou, mais especificamente, a porcentagem de tempo em que a concentração está em uma faixa específica.
   
-- Comando simples: `pollutionRose(dado, pollutant = "O3")`
+- Comando simples: `pollutionRose(dado, pollutant = "X")`
 
 ## 7.6 pollutionRose
 ```{r}
@@ -587,7 +589,7 @@ percentileRose(dado,
 ## 7.8 polarPlot
 - Traça um gráfico polar bivariado de concentrações. As concentrações variam de acordo com a velocidade e a direção do vento.
   
-- Comando simples: `polarPlot(dado, pollutant = "O3")`
+- Comando simples: `polarPlot(dado, pollutant = "X")`
 
 ## 7.8 polarPlot
 ```{r}
@@ -620,7 +622,7 @@ polarPlot(dado,
 
 - Considera aspectos temporais de uma concentração de poluentes por direção do vento, visualizando variações diurnas, de dias da semana, sazonais e de tendências.
   
-- Comando simples: `polarAnnulus(dado, pollutant = "O3")`
+- Comando simples: `polarAnnulus(dado, pollutant = "X")`
 
 ## 7.9 polarAnnulus
 ```{r, eval=FALSE}
@@ -644,7 +646,7 @@ polarAnnulus(dado,
             
 ## 5° Exercício
   
-5) Fazer um polarPlot e um polarAnnulus de todo o período analisado, usando o statistic = “mean”(default).  E plotar elas juntas, com as escalas do lado direito.
+5) Fazer um polarPlot e um polarAnnulus de todo o período analisado (2023 e 2024), usando o statistic = “mean”(default).  E plotar elas juntas, com as escalas do lado direito.
 
 ## Script do exercício 5
 ```{r, eval=FALSE}
@@ -664,7 +666,7 @@ grid.arrange(pp$plot, pa$plot, nrow=1, ncol=2)
 
 - São gráficos de dispersão. O objetivo da função scatterPlot é tornar simples a consideração de como as variáveis estão relacionadas entre si de uma forma consistente.
   
-- Comando simples: `scatterPlot(dado)`
+- Comando simples: `scatterPlot (dado, x = "X", y = "Y")`
 
 ## 7.10 scatterPlot
 ```{r}
