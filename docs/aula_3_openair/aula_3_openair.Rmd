@@ -148,22 +148,6 @@ dado <- cetesb_retrieve_param(my_user_name,
 
 # 4. Organizando os dados
 
-## 4. Organizando os dados
-```{r, eval=FALSE}
-dado$date <- as.POSIXct(
-  strptime(dado$date, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"))
-dado$hour <- as.numeric((dado$hour)) #transformando a coluna em numérica
-names(dado) <- c("date","estacao","wd", "pm25","o3", "ws") #trocar o nome do cabeçalho
-dado["hour"]<- format(dado$date, "%H") #criando coluna só com hora
-novo <- dado[ ,c(1,5)] #novo dataframe com as variáveis selecionadas
-dado$aqs <- "Pinheiros" # criou nova coluna
-
-cbind # faz a junção dos data.frames pela coluna
-rbind # faz a junção dos data.frames pela linha
-
-df4 <- cbind(df1,df2,df3)
-```
-
 ## 4.1 Transformar os dados horários em diários
 ```{r, eval=FALSE}
 diario <- timeAverage(dado, avg.time = "day") 
@@ -180,12 +164,6 @@ periodo <- selectByDate(dado,
 # também pode ser inserido no meio das funções
 ```
 
-## 4.3 Trocando valores de calibração por NA's
-```{r, eval=FALSE}
-dado$O3<- replace(dado$O3, dado$O3 <= 0, NA)
-dado$O3 <- replace(dado$O3, dado$hour == "06", NA)
-```
-
 # 5. Exportando os dados
 
 ## 5. Exportando os dados
@@ -193,18 +171,6 @@ dado$O3 <- replace(dado$O3, dado$hour == "06", NA)
 write.csv(dado, "C:/Users/Fulano/R files/dado_teste.csv", 
           row.names = FALSE)
 ```
-
-
-# 6. Exportando as figuras
-
-## 6. Exportando as figuras
-```{r, eval=FALSE}
-setwd(" C:/Users/Fulano/R files ")
-png("O3.png", width = 9 * 300, height = 5 * 300, res = 300)
-timeVariation (dado, pollutant = "o3")
-dev.off()
-```
-
 
 ## 2° Exercício
   
@@ -223,9 +189,9 @@ write.csv(diario,
 ```
 
 
-# 7. Funções do pacote openair
+# 6. Funções do pacote openair
 
-## 7. Funções do pacote openair
+## 6. Funções do pacote openair
 
 - As funções presentes no pacote Openair são dedicadas à análise de dados de poluição atmosférica.
   
@@ -233,13 +199,13 @@ write.csv(diario,
   
 - Entre as principais funções, temos: `summaryPlot`, `timePlot`, `calendarPlot`, `timeVariation`, `windRose`, `percentilRose`, `polarPlot`, `polarAnnulus`, `scatterPlot`, `corPlot.` 
 
-## 7.1 summaryPlot
+## 6.1 summaryPlot
 
 - Interessante para monitoramento, pois resume rapidamente aspectos importantes dos dados, apresentando resumos estatísticos (mín, máx, média, mediana etc).
   
 Comando simples: `summaryPlot(dado)`
 
-## 7.1 summaryPlot
+## 6.1 summaryPlot
 ```{r, out.width="60%"}
 library(openair)
 dado <- readRDS(”../../data/pin_openair_ex.rds”)
@@ -247,7 +213,7 @@ summaryPlot(dado)
 # dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 ```
 
-## 7.1 summaryPlot
+## 6.1 summaryPlot
 ```{r, eval=FALSE}
 summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
              period = "months", #melhora a visualização do dado para os períodos disponíveis
@@ -259,7 +225,7 @@ summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
              col.mis= "red") #cor a ser usada para mostrar dados ausentes
 ```
 
-## 7.1 summaryPlot
+## 6.1 summaryPlot
 ```{r, echo=FALSE, out.width="80%"}
 summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
              period = "months", #melhora a visualização do dado para os períodos disponíveis
@@ -272,7 +238,7 @@ summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
              col.mis= "red") #cor a ser usada para mostrar dados ausentes
 ```
 
-## 7.2 timePlot
+## 6.2 timePlot
 
 - Para representar rapidamente séries temporais de dados ao mesmo tempo (vários poluentes ou variáveis). Possibilita visualizar o comportamento dos dados (picos de concentração, falhas nos dados, etc), auxiliando-o na seleção dos dados. 
   
@@ -283,7 +249,7 @@ summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
 Pode ser usado o `selectByDate` nessa função
 \end{alertblock}
 
-## 7.2 timePlot
+## 6.2 timePlot
 ```{r, eval=FALSE}
 timePlot(dado, 
          pollutant = c("o3","pm25"))
@@ -301,12 +267,12 @@ timePlot(selectByDate(dado, year = "2024"), #selecionando o período
 #obs: date.format (%d/%m/%Y; %b/%Y; %b-%Y; %d-%m; %m-%d; %B-%Y )
 ```
 
-## 7.2 timePlot
+## 6.2 timePlot
 ```{r}
 timePlot(dado, pollutant = c("o3","pm25"))
 ```
 
-## 7.2 timePlot
+## 6.2 timePlot
 ```{r, eval=FALSE}
 timePlot(selectByDate(dado, year = "2019"), #selecionando o período
          pollutant = c("o3","pm25"), #selecionando o(s) poluente(s)
@@ -321,7 +287,7 @@ timePlot(selectByDate(dado, year = "2019"), #selecionando o período
 #obs: date.format (%d/%m/%Y; %b/%Y; %b-%Y; %d-%m; %m-%d; %B-%Y )
 ```
 
-## 7.2 timePlot
+## 6.2 timePlot
 ```{r, echo=FALSE}
 timePlot(selectByDate(dado, year = "2019"), #selecionando o período
          pollutant = c("o3","pm25"), #selecionando o(s) poluente(s)
@@ -352,7 +318,7 @@ timePlot(selectByDate(dado, year = "2024", month = c("jun", "jul", "ago")),
          ref.y = list(h = 15, lty = 5, col = ("red")))
 ```
 
-## 7.3 calendarPlot
+## 6.3 calendarPlot
 
 - Representação dos dados na escala de dias ou meses, mostrando as concentrações diárias dispostas em formato de calendário.
   
@@ -360,12 +326,12 @@ timePlot(selectByDate(dado, year = "2024", month = c("jun", "jul", "ago")),
   
 - Comando simples: `calendarPlot(dado, pollutant = "X")`
 
-## 7.3 calendarPlot
+## 6.3 calendarPlot
 ```{r}
 calendarPlot(dado, pollutant = "o3", year = 2024)
 ```
 
-## 7.3 calendarPlot
+## 6.3 calendarPlot
 ```{r, eval=FALSE}
 calendarPlot(selectByDate(dado, 
              year = 2024, month = c("jun","jul","aug")), #seleciona o ano/mês desejado
@@ -381,7 +347,7 @@ calendarPlot(selectByDate(dado,
              key.footer = "PM2.5") #texto na legenda: key.header = "PM2.5" em cima
 ```
 
-## 7.3 calendarPlot
+## 6.3 calendarPlot
 ```{r, echo=FALSE}
 calendarPlot(selectByDate(dado, 
              year = 2019, month = c("jun","jul","aug")), #seleciona o ano/mês desejado
@@ -397,18 +363,18 @@ calendarPlot(selectByDate(dado,
              key.footer = "PM2.5") #texto na legenda: key.header = "PM2.5" em cima
 ```
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 
 - Essa função produz quatro gráficos: a variação das concentrações do dia ao longo da semana, variação média da hora do dia, um gráfico mensal (média) e variação das concentrações ao longo da semana (média). Também é mostrado nos gráficos o intervalo de confiança de 95% na média.
   
 - Na poluição atmosférica, a variação de um poluente por hora do dia e dia da semana pode revelar informações úteis sobre as fontes prováveis.
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 ```{r}
 timeVariation(dado, pollutant = c("o3"))
 ```
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 ```{r, eval=FALSE}
 timeVariation(selectByDate(dado, 
               year = 2019, month = c("jun", "julho", "ago")),
@@ -420,7 +386,7 @@ timeVariation(selectByDate(dado,
 #group = "season", "weekend", "month"
 ```
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 ```{r, echo=FALSE}
 timeVariation(selectByDate(dado, year = 2024, month = c("jun", "julho", "ago")),
               pollutant = c("o3"), 
@@ -431,7 +397,7 @@ timeVariation(selectByDate(dado, year = 2024, month = c("jun", "julho", "ago")),
 #group = "season", "weekend", "month"
 ```
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 ```{r, eval=FALSE}
 tv <- splitByDate(dado, dates = "30/06/2019", 
                   labels = c("Úmido", "Seco"))
@@ -446,7 +412,7 @@ plot(o3, subset = "hour") #selecionando apenas 1 das 4 figuras
 #subset: month, hour, day, day.hour
 ```
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 ```{r, echo=FALSE}
 tv <- splitByDate(dado, dates = "30/06/2019", 
                   labels = c("Úmido", "Seco"))
@@ -459,7 +425,7 @@ o3 <-timeVariation(tv, pollutant = c("o3"),
                    cols = c("blue", "red"))
 ```
 
-## 7.4 timeVariation
+## 6.4 timeVariation
 ```{r, out.height="60%"}
 #selecionando apenas 1 das 4 figuras
 #subset: month, hour, day, day.hour
@@ -484,7 +450,7 @@ o3 <-timeVariation(tv, pollutant = c("o3"),
 plot(o3, subset = "hour") #selecionando apenas 1 das 4 figuras
 ```
 
-## 7.5 windRose
+## 6.5 windRose
 
 - Utilizada para visualizar dados de velocidade e direção do vento. Com essa função é possível observar como as condições meteorológicas variam com o tempo (mês, ano, estação, etc).
   
@@ -495,12 +461,12 @@ plot(o3, subset = "hour") #selecionando apenas 1 das 4 figuras
 Deixar como nome das variáveis de \alert{ws} e \alert{wd}.
 \end{alertblock} 
 
-## 7.5 windRose
+## 6.5 windRose
 ```{r}
 windRose(dado)
 ```
 
-## 7.5 windRose
+## 6.5 windRose
 ```{r, eval=FALSE}
 windRose(dado, type = "year", 
          layout = c(3, 1), #layout do gráfico
@@ -513,7 +479,7 @@ windRose(dado, type = "year",
 #type: “season”, “year”, “weekday”
 ```
 
-## 7.5 windRose
+## 6.5 windRose
 ```{r, echo=FALSE}
 windRose(dado, type = "year", 
          layout = c(3, 1), #layout do gráfico
@@ -526,18 +492,18 @@ windRose(dado, type = "year",
 #type: “season”, “year”, “weekday”
 ```
 
-## 7.6 pollutionRose
+## 6.6 pollutionRose
 
 - É uma variante da função “windRose” que é útil para considerar concentrações de poluentes por direção do vento ou, mais especificamente, a porcentagem de tempo em que a concentração está em uma faixa específica.
   
 - Comando simples: `pollutionRose(dado, pollutant = "X")`
 
-## 7.6 pollutionRose
+## 6.6 pollutionRose
 ```{r}
 pollutionRose(dado, pollutant = "o3")
 ```
 
-## 7.6 pollutionRose
+## 6.6 pollutionRose
 ```{r, eval=FALSE}
 pollutionRose (selectByDate(dado, year = 2019),
                pollutant = "o3", 
@@ -546,7 +512,7 @@ pollutionRose (selectByDate(dado, year = 2019),
                layout = c(2,2))
 ```
 
-## 7.6 pollutionRose
+## 6.6 pollutionRose
 ```{r, echo=FALSE}
 pollutionRose (selectByDate(dado, year = 2019),
                pollutant = "o3", 
@@ -555,18 +521,18 @@ pollutionRose (selectByDate(dado, year = 2019),
                layout = c(2,2))
 ```
 
-## 7.7 percentileRose
+## 6.7 percentileRose
 
 - Calcula os níveis percentuais de um poluente e os plota pela direção do vento.
   
 - Comando simples: `percentileRose(dado, pollutant = "O3")`
 
-## 7.7 percentileRose
+## 6.7 percentileRose
 ```{r}
 percentileRose(dado, pollutant = "o3", smooth = TRUE) #, percentile = NA)
 ```
 
-## 7.7 percentileRose
+## 6.7 percentileRose
 ```{r, eval=FALSE}
 percentileRose(dado, 
                pollutant="o3", 
@@ -576,7 +542,7 @@ percentileRose(dado,
                smooth = TRUE) #dados suavizados
 ```
 
-## 7.7 percentileRose
+## 6.7 percentileRose
 ```{r, echo=FALSE}
 percentileRose(dado, 
                pollutant="o3", 
@@ -586,17 +552,17 @@ percentileRose(dado,
                smooth = TRUE) #dados suavizados
 ```
 
-## 7.8 polarPlot
+## 6.8 polarPlot
 - Traça um gráfico polar bivariado de concentrações. As concentrações variam de acordo com a velocidade e a direção do vento.
   
 - Comando simples: `polarPlot(dado, pollutant = "X")`
 
-## 7.8 polarPlot
+## 6.8 polarPlot
 ```{r}
 polarPlot(dado, pollutant = "o3")
 ```
 
-## 7.8 polarPlot
+## 6.8 polarPlot
 ```{r, eval=FALSE}
 polarPlot(dado, 
           pollutant = "o3", 
@@ -607,7 +573,7 @@ polarPlot(dado,
 #obs: statistic = “mean”(default), “median”, “max”(maximum), “frequency”, “stdev” (standard deviation)
 ```
 
-## 7.8 polarPlot
+## 6.8 polarPlot
 ```{r, echo=FALSE}
 polarPlot(dado, 
           pollutant = "o3", 
@@ -618,13 +584,13 @@ polarPlot(dado,
 #obs: statistic = “mean”(default), “median”, “max”(maximum), “frequency”, “stdev” (standard deviation)
 ```
 
-## 7.9 polarAnnulus
+## 6.9 polarAnnulus
 
 - Considera aspectos temporais de uma concentração de poluentes por direção do vento, visualizando variações diurnas, de dias da semana, sazonais e de tendências.
   
 - Comando simples: `polarAnnulus(dado, pollutant = "X")`
 
-## 7.9 polarAnnulus
+## 6.9 polarAnnulus
 ```{r, eval=FALSE}
 polarAnnulus(dado, 
              pollutant = "o3", 
@@ -634,7 +600,7 @@ polarAnnulus(dado,
              key.footer = "O3")
 ```             
 
-## 7.9 polarAnnulus
+## 6.9 polarAnnulus
 ```{r, echo=FALSE}
 polarAnnulus(dado, 
              pollutant = "o3", 
@@ -662,18 +628,18 @@ grid.arrange(pp$plot, pa$plot, nrow=1, ncol=2)
 ```  
 
 
-## 7.10 scatterPlot
+## 6.10 scatterPlot
 
 - São gráficos de dispersão. O objetivo da função scatterPlot é tornar simples a consideração de como as variáveis estão relacionadas entre si de uma forma consistente.
   
 - Comando simples: `scatterPlot (dado, x = "X", y = "Y")`
 
-## 7.10 scatterPlot
+## 6.10 scatterPlot
 ```{r}
 scatterPlot(dado, x="ws", y="pm25")
 ```  
 
-## 7.10 scatterPlot
+## 6.10 scatterPlot
 ```{r, eval=FALSE}
 scatterPlot(dado, x = "o3", y = "pm25",
 linear = TRUE, #mostra a equação da reta e o valor de R2
@@ -681,7 +647,7 @@ type = "year", #"wd", "season"
 layout = c(2, 2))
 ```  
 
-## 7.10 scatterPlot
+## 6.10 scatterPlot
 ```{r, echo=FALSE}
 scatterPlot(dado, x = "o3", y = "pm25",
 linear = TRUE, #mostra a equação da reta e o valor de R2
@@ -689,18 +655,18 @@ type = "year", #"wd", "season"
 layout = c(2, 2))
 ```  
 
-## 7.11 corPlot
+## 6.11 corPlot
 
 - Mostra a correlação entre duas ou mais variáveis.
   
 - Comando simples: `corPlot(dado)`
 
-## 7.11 corPlot
+## 6.11 corPlot
 ```{r}
 corPlot(dado)
 ```  
 
-## 7.11 corPlot
+## 6.11 corPlot
 ```{r, eval=FALSE}
 corPlot(dado, 
         pollutants =c ( "o3", "pm25", "ws", "wd"),
@@ -710,7 +676,7 @@ corPlot(dado,
 #obs2: type = “season”, “year”, “weekday” etc.
 ```  
 
-## 7.11 corPlot
+## 6.11 corPlot
 ```{r, echo=FALSE}
 corPlot(dado, 
         pollutants =c ( "o3", "pm25", "ws", "wd"),
@@ -719,6 +685,36 @@ corPlot(dado,
 #obs1: type = "default“ -> dendrogram = TRUE
 #obs2: type = “season”, “year”, “weekday” etc.
 ``` 
+
+## 7. Extras
+```{r, eval=FALSE}
+dado$date <- as.POSIXct(
+  strptime(dado$date, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"))
+dado$hour <- as.numeric((dado$hour)) #transformando a coluna em numérica
+names(dado) <- c("date","estacao","wd", "pm25","o3", "ws") #trocar o nome do cabeçalho
+dado["hour"]<- format(dado$date, "%H") #criando coluna só com hora
+novo <- dado[ ,c(1,5)] #novo dataframe com as variáveis selecionadas
+dado$aqs <- "Pinheiros" # criou nova coluna
+
+cbind # faz a junção dos data.frames pela coluna
+rbind # faz a junção dos data.frames pela linha
+
+df4 <- cbind(df1,df2,df3)
+```
+## 7.1 Trocando valores de calibração por NA's
+```{r, eval=FALSE}
+dado$O3<- replace(dado$O3, dado$O3 <= 0, NA)
+dado$O3 <- replace(dado$O3, dado$hour == "06", NA)
+```
+
+## 7.2 Exportando as figuras
+```{r, eval=FALSE}
+setwd(" C:/Users/Fulano/R files ")
+png("O3.png", width = 9 * 300, height = 5 * 300, res = 300)
+timeVariation (dado, pollutant = "o3")
+dev.off()
+```
+
 
 ## Atividade final:
   
