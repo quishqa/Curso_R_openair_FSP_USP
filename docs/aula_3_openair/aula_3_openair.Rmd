@@ -208,7 +208,7 @@ Comando simples: `summaryPlot(dado)`
 ## 6.1 summaryPlot
 ```{r, out.width="60%"}
 library(openair)
-dado <- readRDS(”../../data/pin_openair_ex.rds”)
+dado <- readRDS("../../data/pin_openair_ex.rds")
 summaryPlot(dado)
 # dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 ```
@@ -328,7 +328,9 @@ timePlot(selectByDate(dado, year = "2024", month = c("jun", "jul", "ago")),
 
 ## 6.3 calendarPlot
 ```{r}
-calendarPlot(dado, pollutant = "o3", year = 2024)
+library(openair)
+# calendarPlot(dado, pollutant = "o3", year = 2024)
+head(dado)
 ```
 
 ## 6.3 calendarPlot
@@ -388,14 +390,17 @@ timeVariation(selectByDate(dado,
 
 ## 6.4 timeVariation
 ```{r, echo=FALSE}
-timeVariation(selectByDate(dado, year = 2024, month = c("jun", "julho", "ago")),
-              pollutant = c("o3"), 
-              group = "season",
-              ylab = " O3 (ug m-3)", 
-              hemisphere = "southern",
-              xlab = c("Hora", "Hora", "Mês", "Dias da semana"))
+timeVariation(
+  selectByDate(dado, year = 2019, month = c("jun", "julho", "ago")),
+  pollutant = c("o3"), 
+  group = "season",
+  ylab = " O3 (ug m-3)", 
+  hemisphere = "southern",
+  xlab = c("Hora", "Hora", "Mês", "Dias da semana")
+  )
 #group = "season", "weekend", "month"
 ```
+
 
 ## 6.4 timeVariation
 ```{r, eval=FALSE}
