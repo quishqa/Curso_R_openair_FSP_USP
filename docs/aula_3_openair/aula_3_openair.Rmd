@@ -2,7 +2,7 @@
 title: Introdução à Linguagem de Programação em R para tratamento de dados de poluição do ar
 subtitle: openair
 author: Mario Gavidia-Calderón, Rafaela Squizzato, Thiago Nogueira
-date: 07/02/2024
+date: 19/02/2025
 institute: Universidade de São Paulo
 output: binb::metropolis
 fontsize: 12pt
@@ -52,11 +52,11 @@ https://bookdown.org/david_carslaw/openair/
   
 - Não é possível usar um número isolado para nomear objetos.
   
-- Evite usar acentos, cedilhas, apóstrofes, aspas, etc. em nomes de objetos no R.
+- Evite usar acento, cedilha, apóstrofo, aspas, etc. em nomes de objetos no R.
 
 # 2. Instalar e desinstalar pacotes
 
-## 2 Instalar e desinstalar pacotes
+## 2. Instalar e desinstalar pacotes
 ```{r, eval=FALSE}
 install.packages("openair") 
 remove.packages("openair")
@@ -70,7 +70,7 @@ library(openair)
 library(readxl) #para ler arquivos em excel (.xls)
 ```
 
-# 3 Importando os dados
+# 3. Importando os dados
 
 ## 3.1 Em `.xls`
 ```{r, eval=FALSE}
@@ -166,7 +166,7 @@ periodo <- selectByDate(dado,
 
 # 5. Exportando os dados
 
-## 5. Exportando os dados
+## 5.1 Exportando os dados
 ```{r, eval=FALSE}
 write.csv(dado, "C:/Users/Fulano/R files/dado_teste.csv", 
           row.names = FALSE)
@@ -308,14 +308,15 @@ timePlot(selectByDate(dado, year = "2019"), #selecionando o período
 
 ## Script do exercício 3
 ```{r, eval=FALSE}
-timePlot(selectByDate(dado, year = "2024", month = c("jun", "jul", "ago")),
-         pollutant = c("pm25"), 
-         date.format = "%b-%Y",
-         avg.time = "day",
-         lwd = 2,
-         ylab = "PM2.5 (ug/m3)",
-         cols= "blue",
-         ref.y = list(h = 15, lty = 5, col = ("red")))
+timePlot(selectByDate(dado, year = "2024", 
+               month = c("jun", "jul", "ago")),
+             pollutant = c("pm25"), 
+             date.format = "%b-%Y",
+             avg.time = "day",
+             lwd = 2,
+             ylab = "PM2.5 (ug/m3)",
+             cols= "blue",
+             ref.y = list(h = 15, lty = 5, col = ("red")))
 ```
 
 ## 6.3 calendarPlot
