@@ -130,7 +130,7 @@ dado <- cetesb_retrieve_param(my_user_name,
   
 1) Baixar a partir do pacote qualR as variáveis O3, PM2.5, NO2, VV e DV para a estação Pinheiros, para os anos de 2023 e 2024.
 ```{r, eval=FALSE}
-dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
+
 ```
 
 ## Script do exercício 1
@@ -151,6 +151,8 @@ dado <- cetesb_retrieve_param(my_user_name,
 ## 4.1 Transformar os dados horários em diários
 ```{r, eval=FALSE}
 diario <- timeAverage(dado, avg.time = "day") 
+
+dado$wd<- replace(dado$wd,  dado$wd > 360, NA)
 ```
 \metroset{block=fill}
 \begin{alertblock}{OBS:}
@@ -248,24 +250,6 @@ summaryPlot (dado[, c(1,3,4,5,6)], #selecionando as variáveis que deseja
 \begin{alertblock}{OBS:} 
 Pode ser usado o `selectByDate` nessa função
 \end{alertblock}
-
-## 6.2 timePlot
-```{r, eval=FALSE}
-timePlot(dado, 
-         pollutant = c("o3","pm25"))
-
-timePlot(selectByDate(dado, year = "2024"), #selecionando o período
-         pollutant = c("o3","pm25"), #selecionando o(s) poluente(s)
-         y.relation = "free", #escala varia de acordo com o poluente
-         name.pol = c ("O3 (ppb)","PM25 (ug/m3)"), #insere o nome desejado (y)
-         date.format = "%b-%Y", #o formato da data
-         avg.time = "month", #período de tempo da média
-         date.breaks = 10,
-         windflow = list(scale = 0.05, lwd =2, col = "gray"), #insere dado de vento
-         ref.y = list(h = 15, lty = 5, col = ("red"))) #insere linha horizontal no gráfico
-
-#obs: date.format (%d/%m/%Y; %b/%Y; %b-%Y; %d-%m; %m-%d; %B-%Y )
-```
 
 ## 6.2 timePlot
 ```{r}
@@ -531,11 +515,12 @@ pollutionRose (selectByDate(dado, year = 2019),
 
 - Calcula os níveis percentuais de um poluente e os plota pela direção do vento.
   
-- Comando simples: `percentileRose(dado, pollutant = "O3")`
+- Comando simples: `percentileRose(dado, pollutant = "X")`
 
 ## 6.7 percentileRose
 ```{r}
-percentileRose(dado, pollutant = "o3", smooth = TRUE) #, percentile = NA)
+percentileRose(dado, pollutant = "o3", 
+              smooth = TRUE) 
 ```
 
 ## 6.7 percentileRose
@@ -575,7 +560,7 @@ polarPlot(dado,
           key.footer = "O3", #adiciona texto na escala
           key.position = "bottom", #posição da escala
           type = "weekday", #“season”, “year”
-          estatística = "mean")
+          statistic = "mean")
 #obs: statistic = “mean”(default), “median”, “max”(maximum), “frequency”, “stdev” (standard deviation)
 ```
 
@@ -722,67 +707,4 @@ dev.off()
 ```
 
 
-## Atividade final:
-  
-Selecionar os meses de março e abril de 2020, criando um novo data frame (periodo).
-Plotar um timePlot com as concentrações de O$_3$ e NO$_2$ separando com uma linha vertical o período de 01 a 22 de março de 2020 (pré-lockdwon) e de 23 de março em diante (Lockdown).
-Usando o splitByDate e o timeVariation, avaliar se houve diferença entre as concentrações de O$_3$ e NO$_2$ quanto ao perfil diurno (hour) e dia da semana (day.hour). Exportar as figuras ao final.
-
-## Script da atividade final
-
-```{r, eval=FALSE}
-periodo <- selectByDate(dado, year = c(2020), month = c(3:4))
-setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
-png("timePlot.png", width = 9 * 300, height = 5 * 300, res = 300)
-timePlot(periodo,
-         pollutant = c("o3", "no2"), 
-         date.format = "%d-%b",
-         avg.time = "hour",
-         lwd = 1, #espessura da linha
-         y.relation = "free",
-         ylab = " ",
-         cols= c("blue", "red"),
-         ref.x = list(v = as.POSIXct("2020-03-22"), lty = 5))
-dev.off()
-```
-
-## Script da atividade final
-
-```{r, eval=FALSE}
-tv <- splitByDate(periodo, dates = "22/03/2020", 
-                  labels = c("pré-lockdown", "lockdown"))
-no2 <-timeVariation(tv, pollutant = c("no2"), 
-                   group = "split.by", 
-                   ylab = "NO2 (ppb)", 
-                   xlab = c("Hour", "Hour", "Month", "Weekday"),
-                   ylim = c(0,60))
-```
-
-## Script da atividade final
-```{r, eval=FALSE}
-setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
-png("tV_diurno_no2.png", width = 9 * 300, height = 4 * 300, res = 300)
-hour <- plot(no2, subset = c("hour"))
-dev.off()
-setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
-png("tV_semana_no2.png", width = 9 * 300, height = 4 * 300, res = 300)
-day_hour<- plot(no2, subset = c("day.hour"))
-dev.off()
-```
-
-## Script da atividade final
-```{r, eval=FALSE}
-o3 <-timeVariation(tv, pollutant = c("o3"),
-                    group = "split.by", 
-                    ylab = "O3(ppb)", 
-                    xlab = c("Hour", "Hour", "Month", "Weekday"),
-                    ylim = c(0,120))
-setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
-png("tV_diurno_o3.png", width = 9 * 300, height = 5 * 300, res = 300)
-plot(o3, subset= c("hour"))
-dev.off()
-setwd("C:\\Users\\Rafaela\\Dropbox\\POSDOC\\curso rstudio")
-png("tV_semana_o3.png", width = 9 * 300, height = 4 * 300, res = 300)
-plot(o3, subset= c("day.hour"))
-dev.off()
-``` 
+ 
